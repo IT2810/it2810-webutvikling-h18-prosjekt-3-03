@@ -17,8 +17,8 @@ class OmniBox extends Component {
     }
 
     onChange(event) {
-        var title = event.nativeEvent.text;
-        var dataList = this.props.data.filter((item) => item.title.match(new RegExp('.*' + title + '.*', 'gi')));
+        const title = event.nativeEvent.text;
+        const dataList = this.props.data.filter((item) => item.title.match(new RegExp('.*' + title + '.*', 'gi')));
 
         this.setState({
             newValue: title
@@ -27,11 +27,11 @@ class OmniBox extends Component {
     }
 
     onKeyPress(event) {
-        if (event.nativeEvent.key == 'Enter' && this.state.newValue) {
-            var newDataItem = new TodoModel(this.state.newValue);
+        if (event.nativeEvent.key === 'Enter' && this.state.newValue) {
+            const newDataItem = new TodoModel(this.state.newValue);
 
-            var dataList = this.props.data;
-            var dataItem = Utils.findTodo(newDataItem, dataList);
+            const dataList = this.props.data;
+            const dataItem = Utils.findTodo(newDataItem, dataList);
             if (dataItem) {
                 Utils.move(dataList, (dataList.indexOf(dataItem)), 0);
 
@@ -61,8 +61,9 @@ class OmniBox extends Component {
                 borderWidth: 1,
                 borderColor: '#eee',
                 borderRadius: 8,
-                backgroundColor: '#fff'
+                backgroundColor: '#fff',
             }}
+                       underlineColorAndroid='transparent'
                        placeholder='Add a todo or Search'
                        blurOnSubmit={false}
                        value={this.state.newValue}

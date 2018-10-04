@@ -18,7 +18,7 @@ class ListViewItem extends Component {
     }
 
     _onCheckBoxPressed() {
-        var data = this.state.data;
+        const data = this.state.data;
         data.completed = !data.completed;
         this.setState({
             data: data
@@ -40,7 +40,7 @@ class ListViewItem extends Component {
                 borderColor: '#eee'
             }} {...this.props.sortHandlers}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <CheckBox data={data} color={color} onCheckBoxPressed={this._onCheckBoxPressed}></CheckBox>
+                    <CheckBox data={data} color={color} onCheckBoxPressed={this._onCheckBoxPressed}/>
                     <Text
                         style={{fontSize: 18, color: color, textDecorationLine: textDecorationLine}}>{data.title}</Text>
                 </View>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, TouchableHighlight} from 'react-native';
+import {View} from 'react-native';
 import TodoModel from './TodoModel';
 import OmniBox from './OmniBox';
 import SortableListView from 'react-native-sortable-listview';
@@ -7,15 +7,13 @@ import ListViewItem from './ListViewItem';
 import Utils from './Utils';
 
 let dataList = [
-    new TodoModel('Hello Koding'),
-    new TodoModel('Make a Todo App with React Native'),
     new TodoModel('Check to complete a todo'),
     new TodoModel('Long press, drag and drop a todo to sort'),
-    new TodoModel('Save data with Realm'),
-    new TodoModel('Sync data with Firebase')
 ];
+for (let i = 1; i < 15; i++)
+    dataList.push(new TodoModel('' + i))
 
-var dataListOrder = getOrder(dataList);
+let dataListOrder = getOrder(dataList);
 
 function getOrder(list) {
     return Object.keys(list);
@@ -50,7 +48,7 @@ class ListView extends Component {
     }
 
     render() {
-        let listView = (<View></View>);
+        let listView = (<View/>);
         if (this.state.dataList.length) {
             listView = (
                 <SortableListView
@@ -74,6 +72,6 @@ class ListView extends Component {
             </View>
         )
     }
-};
+}
 
 module.exports = ListView;
