@@ -1,14 +1,19 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import StepComponent from './components/StepComponent.js';
+import StepInfoComponent from './components/StepInfoComponent.js';
+import FlatListBasics from './components/StepLogComponent.js';
+//import FlatListDemo from './components/testComp.js';
 
 export default class App extends React.Component {
+/*
+<StepLogComponent />
+<FlatListBasics />
+<Text>Open up App.js to start working on your app!</Text>*/
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <StepComponent />
+<StepInfoComponent />
       </View>
 
     );

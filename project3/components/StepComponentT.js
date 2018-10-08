@@ -9,9 +9,7 @@ export default class StepComponent extends React.Component {
     isPedometerAvailable: "checking",
     pastStepCount: 0,
     currentStepCount: 0,
-    testStepCount: 0,
-    goal: 10000,
-    left: 10000
+    testStepCount: 0
   };
 
   componentDidMount() {
@@ -55,14 +53,6 @@ Pedometer.getStepCountAsync(start, end).then(
     });
   }
 );
-let left = this.state.goal - this.state.pastStepCount;
-console.log ("left: " + left);
-if(left < 0){
-  this.setState({left: 0});
-}
-else{
-  this.setState({left: left});
-}
 this.getStepCountForDate(new Date("2018","09","06"));
 };
 
@@ -92,13 +82,13 @@ render() {
 return (
   <View style={styles.container}>
     <Text>
-      Today:
+      Pedometer.isAvailableAsync(): {this.state.isPedometerAvailable}
     </Text>
     <Text>
-      Steps: {this.state.pastStepCount}
+      Steps taken in the last 24 hours: {this.state.pastStepCount}
     </Text>
-    <Text>Goal: {this.state.goal}</Text>
-    <Text>Left: {this.state.goal - this.state.pastStepCount}</Text>
+    <Text>Walk! And watch this go up: {this.state.currentStepCount}</Text>
+    <Text>Steps: {this.state.testStepCount}</Text>
   </View>
 );
 }
