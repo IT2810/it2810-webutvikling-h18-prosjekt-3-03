@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {TextInput} from 'react-native';
+import {TextInput, Keyboard} from 'react-native';
 import TodoModel from './TodoModel';
 import Utils from './Utils';
 
@@ -8,6 +8,8 @@ class OmniBox extends Component {
         super(props);
         this.onChange = this.onChange.bind(this);
         this.onSubmitEditing = this.onSubmitEditing.bind(this);
+
+        this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', OmniBox._keyboardDidHide);
     }
 
     componentWillMount() {
@@ -37,7 +39,15 @@ class OmniBox extends Component {
 
         this.setState({newValue: ''});
         this.props.updateDataList(dataList);
+
+        // Hides keyboard and removes focus (from TextInput)
+        Keyboard.dismiss();
         // }
+    }
+
+    static _keyboardDidHide() {
+        // Removes focus (from TextInput)
+        Keyboard.dismiss();
     }
 
     render() {
