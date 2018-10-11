@@ -12,7 +12,7 @@ class OmniBox extends Component {
 
     componentWillMount() {
         this.setState({
-            newValue: ''
+            newValue: '',
         });
     }
 
@@ -20,34 +20,23 @@ class OmniBox extends Component {
         const title = event.nativeEvent.text;
         const dataList = this.props.data.filter((item) => item.title.match(new RegExp('.*' + title + '.*', 'gi')));
 
-        this.setState({
-            newValue: title
-        });
+        this.setState({newValue: title});
         this.props.updateDataList(dataList);
     }
 
     onSubmitEditing(event) {
         // if (event.nativeEvent.key === 'Enter' && this.state.newValue) {
-            const newDataItem = new TodoModel(this.state.newValue);
+        const newDataItem = new TodoModel(this.state.newValue);
 
-            const dataList = this.props.data;
-            const dataItem = Utils.findTodo(newDataItem, dataList);
-            if (dataItem) {
-                Utils.move(dataList, (dataList.indexOf(dataItem)), 0);
-
-                this.setState({
-                    newValue: ''
-                });
-                this.props.updateDataList(dataList);
-                return;
-            }
-
+        const dataList = this.props.data;
+        const dataItem = Utils.findTodo(newDataItem, dataList);
+        if (dataItem)
+            Utils.move(dataList, (dataList.indexOf(dataItem)), 0);
+        else
             dataList.unshift(newDataItem);
 
-            this.setState({
-                newValue: ''
-            });
-            this.props.updateDataList(dataList);
+        this.setState({newValue: ''});
+        this.props.updateDataList(dataList);
         // }
     }
 
@@ -69,8 +58,8 @@ class OmniBox extends Component {
                        value={this.state.newValue}
                 // onKeyPress={this.onKeyPress}
                        onSubmitEditing={this.onSubmitEditing}
-                       onChange={this.onChange}>
-            </TextInput>
+                       onChange={this.onChange}
+            />
         );
     }
 }

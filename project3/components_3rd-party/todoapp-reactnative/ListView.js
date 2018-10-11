@@ -11,28 +11,28 @@ let dataList = [
     new TodoModel('Long press, drag and drop a todo to sort'),
 ];
 for (let i = 1; i < 15; i++)
-    dataList.push(new TodoModel('' + i))
+    dataList.push(new TodoModel('' + i));
 
 function moveItem(listView, fromIndex, toIndex) {
     Utils.move(dataList, parseInt(fromIndex), parseInt(toIndex));
+    if (listView.forceUpdate)
+        listView.forceUpdate();
 }
 
 class ListView extends Component {
     constructor(props) {
         super(props);
-        this.updateDataList = this.updateDataList.bind(this);
+        this._updateDataList = this._updateDataList.bind(this);
         this._onCompletedChange = this._onCompletedChange.bind(this);
         this._onRemove = this._onRemove.bind(this);
 
         this.state = {
-            dataList: dataList
-        }
+            dataList: dataList,
+        };
     }
 
-    updateDataList(dataList) {
-        this.setState({
-            dataList: dataList
-        });
+    _updateDataList(dataList) {
+        this.setState({dataList: dataList});
     }
 
     _onCompletedChange(dataItem, index) {
@@ -69,10 +69,11 @@ class ListView extends Component {
             <View style={{flex: 1, marginLeft: 10, marginRight: 10}}>
                 <OmniBox
                     data={dataList}
-                    updateDataList={this.updateDataList}/>
+                    updateDataList={this._updateDataList}
+                />
                 {listView}
             </View>
-        )
+        );
     }
 }
 

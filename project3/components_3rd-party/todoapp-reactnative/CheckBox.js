@@ -22,8 +22,7 @@ class CheckBox extends Component {
                 activeOpacity={1}
                 borderRadius={5}
                 onPress={this.props.onCheckBoxPressed}
-            >
-            </Icon.Button>
+            />
         );
     }
 }

@@ -5,5 +5,5 @@ module.exports = {
 
     findTodo: function (todo, todoList) {
         return todoList.find((item) => item.title.toLowerCase() === todo.title.toLowerCase());
-    }
+    },
 };
