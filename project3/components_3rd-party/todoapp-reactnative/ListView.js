@@ -29,6 +29,8 @@ class ListView extends Component {
         super(props);
         this.updateDataList = this.updateDataList.bind(this);
         this._onCompletedChange = this._onCompletedChange.bind(this);
+        this._onRemove = this._onRemove.bind(this);
+
         this.state = {
             dataList: dataList
         }
@@ -47,6 +49,11 @@ class ListView extends Component {
         moveOrderItem(this, fromIndex, toIndex);
     }
 
+    _onRemove(index) {
+        dataList.splice(index, 1); // removes 1 element starting at index
+        this._updateDataList(dataList);
+    }
+
     render() {
         let listView = (<View/>);
         if (this.state.dataList.length) {
@@ -57,8 +64,13 @@ class ListView extends Component {
                     data={this.state.dataList}
                     order={dataListOrder}
                     onRowMoved={e => moveOrderItem(this, e.from, e.to)}
-                    renderRow={(dataItem, section, index) => <ListViewItem data={dataItem} dataIndex={index}
-                                                                           onCompletedChange={this._onCompletedChange}/>}
+                    renderRow={(dataItem, section, index) =>
+                        <ListViewItem data={dataItem}
+                                      dataIndex={index}
+                                      onCompletedChange={this._onCompletedChange}
+                                      onRemove={this._onRemove}
+                        />
+                    }
                 />
             );
         }

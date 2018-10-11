@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {TouchableHighlight, View, Text} from 'react-native';
+import {Button, Icon} from 'native-base';
 import CheckBox from './CheckBox';
 
 class ListViewItem extends Component {
@@ -43,6 +44,12 @@ class ListViewItem extends Component {
                     <CheckBox data={data} color={color} onCheckBoxPressed={this._onCheckBoxPressed}/>
                     <Text
                         style={{fontSize: 18, color: color, textDecorationLine: textDecorationLine}}>{data.title}</Text>
+                    <Button
+                        transparent
+                        onPress={() => this.props.onRemove(this.props.dataIndex)}
+                        style={{marginLeft: 'auto'}}>
+                        <Icon name={"trash"}/>
+                    </Button>
                 </View>
             </TouchableHighlight>
         )
