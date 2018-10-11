@@ -13,15 +13,8 @@ let dataList = [
 for (let i = 1; i < 15; i++)
     dataList.push(new TodoModel('' + i))
 
-let dataListOrder = getOrder(dataList);
-
-function getOrder(list) {
-    return Object.keys(list);
-}
-
-function moveOrderItem(listView, fromIndex, toIndex) {
-    Utils.move(dataListOrder, parseInt(fromIndex), parseInt(toIndex));
-    if (listView.forceUpdate) listView.forceUpdate();
+function moveItem(listView, fromIndex, toIndex) {
+    Utils.move(dataList, parseInt(fromIndex), parseInt(toIndex));
 }
 
 class ListView extends Component {
@@ -37,16 +30,14 @@ class ListView extends Component {
     }
 
     updateDataList(dataList) {
-        dataListOrder = getOrder(dataList);
         this.setState({
             dataList: dataList
         });
     }
 
     _onCompletedChange(dataItem, index) {
-        let fromIndex = dataListOrder.indexOf(index);
-        let toIndex = dataItem.completed ? dataListOrder.length - 1 : 0;
-        moveOrderItem(this, fromIndex, toIndex);
+        const toIndex = dataItem.completed ? dataList.length - 1 : 0;
+        moveItem(this, index, toIndex);
     }
 
     _onRemove(index) {
@@ -62,8 +53,7 @@ class ListView extends Component {
                     ref='listView'
                     style={{flex: 1}}
                     data={this.state.dataList}
-                    order={dataListOrder}
-                    onRowMoved={e => moveOrderItem(this, e.from, e.to)}
+                    onRowMoved={e => moveItem(this, e.from, e.to)}
                     renderRow={(dataItem, section, index) =>
                         <ListViewItem data={dataItem}
                                       dataIndex={index}
