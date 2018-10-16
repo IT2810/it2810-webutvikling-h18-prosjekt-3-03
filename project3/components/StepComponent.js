@@ -135,7 +135,7 @@ createLogData(){
   console.log("yesterday: " + yesterday);*/
   let list = [];
   let goal = 10000;
-  for (var i = 0; i < 30; i++){
+  for (var i = 1; i < 31; i++){
 
     var date = new Date();
     date.setDate(date.getDate()-i);
