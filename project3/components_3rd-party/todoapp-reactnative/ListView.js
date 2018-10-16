@@ -1,37 +1,66 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
-import TodoModel from './TodoModel';
+import {View, AsyncStorage} from 'react-native';
 import OmniBox from './OmniBox';
 import SortableListView from 'react-native-sortable-listview';
 import ListViewItem from './ListViewItem';
 import Utils from './Utils';
 
-let dataList = [
-    new TodoModel('Check to complete a todo'),
-    new TodoModel('Long press, drag and drop a todo to sort'),
-];
-for (let i = 1; i < 15; i++)
-    dataList.push(new TodoModel('' + i));
+let _storeData = async () => {
+    try {
+        await AsyncStorage.setItem(dataListName, JSON.stringify(dataList));
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+const _retrieveData = async () => {
+    try {
+        const value = await AsyncStorage.getItem(dataListName);
+        if (value !== null)
+            dataList = JSON.parse(value);
+        else {
+            // Should only happen the first time the app is used
+            _storeData();
+        }
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+let dataList = [];
+const dataListName = "@Todo:dataList";
 
 function moveItem(listView, fromIndex, toIndex) {
     Utils.move(dataList, parseInt(fromIndex), parseInt(toIndex));
     if (listView.forceUpdate)
         listView.forceUpdate();
+    _storeData();
 }
 
 class ListView extends Component {
     constructor(props) {
         super(props);
         this._updateDataList = this._updateDataList.bind(this);
+        this._updateSearchResults = this._updateSearchResults.bind(this);
         this._onCompletedChange = this._onCompletedChange.bind(this);
         this._onRemove = this._onRemove.bind(this);
 
         this.state = {
             dataList: dataList,
         };
+        // Kind of awkward way of updating state after AsyncStorage has finished retrieving data
+        _retrieveData().then(() => this.setState({dataList: dataList}));
     }
 
     _updateDataList(dataList) {
+        this.setState({dataList: dataList});
+        _storeData();
+    }
+
+    _updateSearchResults(dataList) {
+        // FIXME: Can update AsyncStorage while search results are displayed (e.g. by completing or removing a goal),
+        // and wrongly store that state
+        console.log(this.state.dataList);
         this.setState({dataList: dataList});
     }
 
@@ -70,6 +99,7 @@ class ListView extends Component {
                 <OmniBox
                     data={dataList}
                     updateDataList={this._updateDataList}
+                    updateSearchResults={this._updateSearchResults}
                 />
                 {listView}
             </View>

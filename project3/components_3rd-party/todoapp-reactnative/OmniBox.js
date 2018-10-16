@@ -23,7 +23,7 @@ class OmniBox extends Component {
         const dataList = this.props.data.filter((item) => item.title.match(new RegExp('.*' + title + '.*', 'gi')));
 
         this.setState({newValue: title});
-        this.props.updateDataList(dataList);
+        this.props.updateSearchResults(dataList);
     }
 
     onSubmitEditing(event) {
