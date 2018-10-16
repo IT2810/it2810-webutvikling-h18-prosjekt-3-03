@@ -7,13 +7,22 @@ import { StyleSheet, Text, View } from "react-native";
 
 
 export default class StepComponent extends React.Component {
-  state = {
+  constructor(props) {
+      super(props);
+
+
+
+  this.state = {
     isPedometerAvailable: "checking",
     pastStepCount: 0,
     currentStepCount: 0,
     testStepCount: 0,
     goal: 5000,
+    data: [],
+    readyToSendProps: false,
   };
+  this.getStepCountForDate = this.getStepCountForDate.bind(this);
+}
 
   componentDidMount() {
     this._subscribe();
@@ -57,9 +66,15 @@ Pedometer.getStepCountAsync(start, end).then(
     });
   }
 );
-
-
-
+/*
+this.props.sendData([
+  {key: new Date("2018","09","06").toDateString(), steps:3000, goal: 5000, achieved: false},
+  {key: new Date("2018","09","07").toDateString(), steps:2000, goal: 3000, achieved: false},
+  {key: new Date("2018","09","08").toDateString(), steps:7000, goal: 7000, achieved: true},
+  {key: new Date("2018","09","09").toDateString(), steps:13000, goal: 10000, achieved: true},
+]);
+*/
+this.createLogData();
 //this.getStepCountForDate(new Date("2018","09","07"));
 };
 
@@ -72,10 +87,18 @@ getStepCountForDate(date){
   const start = new Date();
   start.setDate(end.getDate());
   start.setHours(0,0,0,0);
-  console.log("end: " + end + ", start: " + start);
+  //console.log("end: " + end + ", start: " + start);
   Pedometer.getStepCountAsync(start, end).then(
     result => {
-      this.setState({ testStepCount: result.steps });
+      var newData = [];
+      newData = this.state.data;
+      //console.log("new data: " + newData);
+      var achieved = false;
+      if(result.steps>=10000){
+        achieved = true;
+      }
+      newData.push({key: date.toDateString(), steps: result.steps, goal: 10000, achieved: achieved});
+      this.setState({ data: newData });
     },
     error => {
       this.setState({
@@ -83,6 +106,47 @@ getStepCountForDate(date){
       });
       });
 };
+
+sendData() {
+  /*var length = this.state.data.length;
+    var isReady = this.state.readyToSendProps;
+    console.log("isReadey: " + isReady + ", length: " + length);
+      console.log("it is ready");*/
+      var data = this.state.data;
+      this.props.sendData(data);
+      //this.setState({readyToSendProps: false});
+
+  /*
+  console.log("It updated!!");
+  console.log("data: " + this.state.data);
+  console.log("length: " + this.state.data.length);
+    for(var i=0; i< this.state.data.length; i++){
+      console.log(i + "key: " + this.state.data[i].key);
+      console.log(i + "steps: " + this.state.data[i].steps);
+    };*/
+
+}
+
+createLogData(){
+  /*var today = new Date();
+  var yesterday = new Date();
+  yesterday.setDate(yesterday.getDate()-1);
+  console.log("Today: " + today );
+  console.log("yesterday: " + yesterday);*/
+  let list = [];
+  let goal = 10000;
+  for (var i = 0; i < 30; i++){
+
+    var date = new Date();
+    date.setDate(date.getDate()-i);
+    //console.log(date);
+    this.getStepCountForDate(date);
+  }
+  this.setState({
+    readyToSendProps: true,
+  }, this.sendData());
+}
+
 
 _unsubscribe = () => {
 this._subscription && this._subscription.remove();

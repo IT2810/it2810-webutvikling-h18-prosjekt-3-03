@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View, Image } from 'react-native';
+import StepComponent from "./StepComponent.js";
 //<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 // <div>Icons made by <a href="https://www.flaticon.com/authors/nikita-golubev" title="Nikita Golubev">Nikita Golubev</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 
 
 export default class FlatListBasics extends Component {
+  constructor(props) {
+      super(props);
+      this.state={data: [
+        {key: new Date().toDateString(), steps:0, goal: 0, achieved: false},
+      ],
+      isUpdated:false,
+    }
+}
+
   renderListSeparator = () => {
      return (
        <View
@@ -21,18 +31,34 @@ export default class FlatListBasics extends Component {
     };
 
 
+
+    componentDidUpdate(prevProps, prevState) {
+      // only update chart if the data has changed
+
+      console.log("UPDATE");
+      if (prevProps.data !== this.props.data) {
+        this.setState({
+          isUpdated: true,
+        });
+        for(var i=0; i< this.props.data.length; i++){
+          console.log(i + "key: " + this.props.data[i].key);
+          console.log(i + "steps: " + this.props.data[i].steps);
+          console.log(i + "goal: " + this.props.data[i].goal);
+          console.log(i + "achieved: " + this.props.data[i].achieved);
+        };
+
+      }
+    };
+
   render() {
+    let isUpdated = this.state.isUpdated;
+    //console.log("isUpdated: " + isUpdated);
     return (
       <View style={styles.container}>
         <FlatList
         ItemSeparatorComponent={this.renderListSeparator}
         ListHeaderComponent={this.renderListHeader}
-          data={[
-            {key: new Date("2018","09","06").toDateString(), steps:3000, goal: 5000, achieved: false},
-            {key: new Date("2018","09","07").toDateString(), steps:2000, goal: 3000, achieved: false},
-            {key: new Date("2018","09","08").toDateString(), steps:7000, goal: 7000, achieved: true},
-            {key: new Date("2018","09","09").toDateString(), steps:13000, goal: 10000, achieved: true},
-          ]}
+          data={isUpdated ? this.props.data : this.state.data}
           renderItem={({item}) => <View style={styles.container} ><View style={styles.cont2}><Text style={styles.dateText}>{item.key}</Text>
           <Image style={styles.stepImg} source={ require('../assets/run.png')} /><Text style={styles.stepText}>{item.steps}/{item.goal}</Text></ View>
           {item.achieved ? <Image style={styles.starImg} source={ require('../assets/favourites.png')} /> : <Image style={styles.starImg} source={ require('../assets/empty.png')} />}</View>}
@@ -89,7 +115,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#555555",
     alignItems:"center",
 
-    marginTop: "8%",
+    marginTop: "0%",
   },
   headerText:{
     color: "#FFFFFF",

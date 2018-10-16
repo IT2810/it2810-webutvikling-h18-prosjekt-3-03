@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-//import StepInfoComponent from './components/StepInfoComponent.js';
-import FlatListBasics from './components/StepLogComponent.js';
+import StepInfoComponent from './components/StepInfoComponent.js';
+
 //import FlatListDemo from './components/testComp.js';
 
 export default class App extends React.Component {
@@ -15,7 +15,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-<FlatListBasics />
+      <StepInfoComponent />
       </View>
 
     );
