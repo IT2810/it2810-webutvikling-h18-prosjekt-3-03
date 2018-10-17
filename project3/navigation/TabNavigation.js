@@ -1,11 +1,10 @@
 import React from 'react';
-import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
-import { MaterialIcons } from '@expo/vector-icons';
+import {createBottomTabNavigator, createStackNavigator} from 'react-navigation';
+import {MaterialIcons} from '@expo/vector-icons';
 
 import CalendarScreen from '../screens/CalendarScreen';
 import StepsScreen from '../screens/StepsScreen';
 import GoalsScreen from '../screens/GoalsScreen';
-
 
 const CalendarStack = createStackNavigator({
     calendar: {
@@ -16,11 +15,11 @@ const CalendarStack = createStackNavigator({
 CalendarStack.navigationOptions = {
     tabBarIcon: (
         <MaterialIcons
-          name={'event-available'}
-          size={25}
+            name={'event-available'}
+            size={25}
         />
-      ),
-}
+    ),
+};
 
 const StepsStack = createStackNavigator({
     steps: {screen: StepsScreen},
@@ -29,11 +28,11 @@ const StepsStack = createStackNavigator({
 StepsStack.navigationOptions = {
     tabBarIcon: (
         <MaterialIcons
-          name={'directions-run'}
-          size={25}
+            name={'directions-run'}
+            size={25}
         />
-      ),
-}
+    ),
+};
 
 const GoalsStack = createStackNavigator({
     goals: {screen: GoalsScreen},
@@ -42,16 +41,16 @@ const GoalsStack = createStackNavigator({
 GoalsStack.navigationOptions = {
     tabBarIcon: (
         <MaterialIcons
-          name={'check'}
-          size={25}
+            name={'check'}
+            size={25}
         />
-      ),
-}
+    ),
+};
 
 export default createBottomTabNavigator({
-    Steps: StepsStack,
-    Calendar: CalendarStack,
-    Goals: GoalsStack
-    }, 
-    { initialRouteName: 'Calendar'}
+        Steps: StepsStack,
+        Calendar: CalendarStack,
+        Goals: GoalsStack,
+    },
+    {initialRouteName: 'Calendar'},
 );
