@@ -60,7 +60,6 @@ class ListView extends Component {
     _updateSearchResults(dataList) {
         // FIXME: Can update AsyncStorage while search results are displayed (e.g. by completing or removing a goal),
         // and wrongly store that state
-        console.log(this.state.dataList);
         this.setState({dataList: dataList});
     }
 
