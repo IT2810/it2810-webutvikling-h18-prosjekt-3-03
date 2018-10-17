@@ -21,4 +21,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('Hello App', () => App);
+//AppRegistry.registerComponent('Hello App', () => App);
