@@ -1,76 +1,134 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<View
-  accessible={true}
-  isTVSelectable={true}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
-  style={
-    Object {
-      "backgroundColor": "#F8F8F8",
-      "borderBottomWidth": 1,
-      "borderColor": "#eee",
-      "paddingBottom": 6,
-      "paddingTop": 6,
-    }
-  }
->
+<View>
   <View
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "alignItems": "center",
-        "flexDirection": "row",
+        "backgroundColor": "#F8F8F8",
+        "borderBottomWidth": 1,
+        "borderColor": "#eee",
+        "paddingBottom": 6,
+        "paddingTop": 6,
       }
     }
   >
     <View
-      accessible={true}
-      isTVSelectable={true}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
-            "overflow": "hidden",
-          },
-          Object {
-            "backgroundColor": "rgba(0,0,0,0)",
-            "borderRadius": 5,
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+        }
       }
     >
       <View
-        data={
-          TodoModel {
-            "completed": false,
-            "createdAt": 1970-01-01T00:00:00.000Z,
-            "title": "Test title",
-          }
-        }
+        accessible={true}
+        isTVSelectable={true}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
         style={
           Array [
             Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "flex-start",
-              "padding": 8,
+              "overflow": "hidden",
             },
             Object {
               "backgroundColor": "rgba(0,0,0,0)",
               "borderRadius": 5,
             },
-            undefined,
           ]
+        }
+      >
+        <View
+          data={
+            TodoModel {
+              "completed": false,
+              "createdAt": 1970-01-01T00:00:00.000Z,
+              "title": "Test title",
+            }
+          }
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "flex-start",
+                "padding": 8,
+              },
+              Object {
+                "backgroundColor": "rgba(0,0,0,0)",
+                "borderRadius": 5,
+              },
+              undefined,
+            ]
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          />
+        </View>
+      </View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#000",
+            "fontSize": 18,
+            "textDecorationLine": "none",
+          }
+        }
+      >
+        Test title
+      </Text>
+      <View
+        accessible={true}
+        isTVSelectable={true}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "backgroundColor": "transparent",
+            "borderBottomWidth": null,
+            "borderColor": "#007aff",
+            "borderLeftWidth": null,
+            "borderRadius": 5,
+            "borderRightWidth": null,
+            "borderTopWidth": null,
+            "borderWidth": undefined,
+            "elevation": 0,
+            "flexDirection": "row",
+            "height": 45,
+            "justifyContent": "space-between",
+            "marginLeft": "auto",
+            "opacity": 1,
+            "paddingBottom": 6,
+            "paddingTop": 6,
+            "shadowColor": null,
+            "shadowOffset": null,
+            "shadowOpacity": null,
+            "shadowRadius": null,
+          }
         }
       >
         <Text
@@ -80,61 +138,142 @@ exports[`renders correctly 1`] = `
         />
       </View>
     </View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-      style={
-        Object {
-          "color": "#000",
-          "fontSize": 18,
-          "textDecorationLine": "none",
-        }
+  </View>
+  <View
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#F8F8F8",
+        "borderBottomWidth": 1,
+        "borderColor": "#eee",
+        "paddingBottom": 6,
+        "paddingTop": 6,
       }
-    >
-      Test title
-    </Text>
+    }
+  >
     <View
-      accessible={true}
-      isTVSelectable={true}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
         Object {
           "alignItems": "center",
-          "alignSelf": "flex-start",
-          "backgroundColor": "transparent",
-          "borderBottomWidth": null,
-          "borderColor": "#007aff",
-          "borderLeftWidth": null,
-          "borderRadius": 5,
-          "borderRightWidth": null,
-          "borderTopWidth": null,
-          "borderWidth": undefined,
-          "elevation": 0,
           "flexDirection": "row",
-          "height": 45,
-          "justifyContent": "space-between",
-          "marginLeft": "auto",
-          "opacity": 1,
-          "paddingBottom": 6,
-          "paddingTop": 6,
-          "shadowColor": null,
-          "shadowOffset": null,
-          "shadowOpacity": null,
-          "shadowRadius": null,
         }
       }
     >
+      <View
+        accessible={true}
+        isTVSelectable={true}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Array [
+            Object {
+              "overflow": "hidden",
+            },
+            Object {
+              "backgroundColor": "rgba(0,0,0,0)",
+              "borderRadius": 5,
+            },
+          ]
+        }
+      >
+        <View
+          data={
+            TodoModel {
+              "completed": true,
+              "createdAt": 1970-01-01T00:00:00.000Z,
+              "title": "Test title 2",
+            }
+          }
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "flex-start",
+                "padding": 8,
+              },
+              Object {
+                "backgroundColor": "rgba(0,0,0,0)",
+                "borderRadius": 5,
+              },
+              undefined,
+            ]
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          />
+        </View>
+      </View>
       <Text
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
-      />
+        style={
+          Object {
+            "color": "#C5C8C9",
+            "fontSize": 18,
+            "textDecorationLine": "line-through",
+          }
+        }
+      >
+        Test title 2
+      </Text>
+      <View
+        accessible={true}
+        isTVSelectable={true}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "backgroundColor": "transparent",
+            "borderBottomWidth": null,
+            "borderColor": "#007aff",
+            "borderLeftWidth": null,
+            "borderRadius": 5,
+            "borderRightWidth": null,
+            "borderTopWidth": null,
+            "borderWidth": undefined,
+            "elevation": 0,
+            "flexDirection": "row",
+            "height": 45,
+            "justifyContent": "space-between",
+            "marginLeft": "auto",
+            "opacity": 1,
+            "paddingBottom": 6,
+            "paddingTop": 6,
+            "shadowColor": null,
+            "shadowOffset": null,
+            "shadowOpacity": null,
+            "shadowRadius": null,
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        />
+      </View>
     </View>
   </View>
 </View>
