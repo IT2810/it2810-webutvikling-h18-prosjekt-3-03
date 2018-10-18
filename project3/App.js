@@ -1,21 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import TabNavigation from './navigation/TabNavigation';
 import CalendarComponent from './components/CalendarComponent.js';
 
 export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <CalendarComponent/>
-      </View>
-    );
-  }
+    render() {
+        return (
+            <TabNavigation/>
+        );
+    }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-  },
-});
+//AppRegistry.registerComponent('Hello App', () => App);
