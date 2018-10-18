@@ -1,8 +1,8 @@
 class TodoModel {
-    constructor(title, completed) {
+    constructor(title, completed, createdAt = new Date()) {
         this.title = title;
         this.completed = completed || false;
-        this.createdAt = new Date();
+        this.createdAt = createdAt;
     }
 }
 

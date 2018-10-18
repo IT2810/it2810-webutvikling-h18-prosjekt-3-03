@@ -57,7 +57,7 @@ class ListViewItem extends Component {
                         onPress={() => this.props.onRemove(this.props.dataIndex)}
                         style={{marginLeft: 'auto'}}
                     >
-                        <Icon name={"trash"}/>
+                        <Icon name={"md-trash"}/>
                     </Button>
                 </View>
             </TouchableHighlight>
