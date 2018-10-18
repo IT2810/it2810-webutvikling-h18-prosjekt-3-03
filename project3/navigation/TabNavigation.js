@@ -1,6 +1,7 @@
 import React from 'react';
 import {createBottomTabNavigator, createStackNavigator} from 'react-navigation';
-import {MaterialIcons} from '@expo/vector-icons';
+import {MaterialIcons} from 'react-native-vector-icons';
+//@expo/vector-icons
 
 import CalendarScreen from '../screens/CalendarScreen';
 import StepsScreen from '../screens/StepsScreen';
