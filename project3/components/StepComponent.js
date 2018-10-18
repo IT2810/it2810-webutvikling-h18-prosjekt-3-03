@@ -4,6 +4,8 @@ import { Pedometer } from "expo";
 import { StyleSheet, Text, View, AsyncStorage, Image, TextInput } from "react-native";
 import styles from '../stylesheets/StepStylesheet.js';
 // https://docs.expo.io/versions/latest/sdk/pedometer#expopedometergetstepcountasyncstart-end
+// Icon ('../assets/run_big.png') is made by Nikita Golubev (https://www.flaticon.com/authors/nikita-golubev) from www.flaticon.com 
+
 
 export default class StepComponent extends React.Component {
   // The component is a child of StepInfoComponent and shows the step count for today
@@ -61,6 +63,7 @@ Pedometer.getStepCountAsync(start, end).then( // Gets the step count between two
     });
   }
 );
+
 
 this.createLogData(); // Creates step count log and send it to StepInfoComponent (and later to StepLogComponent)
 
