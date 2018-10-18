@@ -1,12 +1,33 @@
 import React from 'react';
-import TabNavigation from './navigation/TabNavigation';
+import { StyleSheet, Text, View } from 'react-native';
+import StepInfoComponent from './components/StepInfoComponent.js';
+
+//import FlatListDemo from './components/testComp.js';
 
 export default class App extends React.Component {
-    render() {
-        return (
-            <TabNavigation/>
-        );
-    }
+/*
+
+
+<FlatListBasics />
+<Text>Open up App.js to start working on your app!</Text>
+<StepInfoComponent />*/
+
+  render() {
+    return (
+      <View style={styles.container}>
+      <StepInfoComponent />
+      </View>
+
+    );
+  }
 }
 
-//AppRegistry.registerComponent('Hello App', () => App);
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    marginBottom: 0,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+  },
+});
