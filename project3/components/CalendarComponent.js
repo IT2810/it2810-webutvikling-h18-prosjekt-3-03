@@ -97,7 +97,7 @@ export default class CalendarComponent extends React.Component {
                 </View>
                 
                 <View style={styles.textAndButtonContainer}>
-                    <TextInput style={{height: 45, borderWidth: 3, borderColor: '#eee', borderRadius: 8, margin: 5}}
+                    <TextInput style={{height: 40, borderWidth: 3, borderColor: '#eee', borderRadius: 8, margin: 5}}
                         placeholder="  Add something"
                         onChangeText={(value) => this.setState({activityText: value})}
                         value={this.state.activityText}
@@ -146,6 +146,7 @@ const styles = StyleSheet.create({
     },
     calendar: {
         flex: 1,
+        justifyContent: 'center',
         borderWidth: 1,
         borderColor: '#eeeeee'
     },
@@ -158,7 +159,7 @@ const styles = StyleSheet.create({
     selectedText: {
         alignSelf: 'center', 
         color: '#ffa500', 
-        fontSize: 20,
+        fontSize: 15,
         padding: 5
     }
 });
