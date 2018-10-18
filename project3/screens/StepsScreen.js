@@ -1,5 +1,6 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import StepInfoComponent from '../components/StepInfoComponent.js';
 
 export default class StepssScreen extends React.Component {
     static navigationOptions = {
@@ -8,9 +9,19 @@ export default class StepssScreen extends React.Component {
 
     render() {
         return (
-            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                <Text>Steps screen</Text>
+            <View style={styles.container}>
+                <StepInfoComponent/>
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        marginBottom: 0,
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+    },
+});
