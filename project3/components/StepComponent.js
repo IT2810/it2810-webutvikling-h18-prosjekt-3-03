@@ -1,28 +1,27 @@
 import Expo from "expo";
 import React from "react";
 import { Pedometer } from "expo";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, AsyncStorage, Image, TextInput } from "react-native";
+import styles from '../stylesheets/StepStylesheet.js';
 // https://docs.expo.io/versions/latest/sdk/pedometer#expopedometergetstepcountasyncstart-end
-// <div>Icons made by <a href="https://www.flaticon.com/authors/photo3idea-studio" title="photo3idea_studio">photo3idea_studio</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
-
 
 export default class StepComponent extends React.Component {
+  // The component is a child of StepInfoComponent and shows the step count for today
+  // It also creates log data and passes it on to StepInfoComponent
+
   constructor(props) {
       super(props);
 
-
-
   this.state = {
     isPedometerAvailable: "checking",
-    pastStepCount: 0,
-    currentStepCount: 0,
-    testStepCount: 0,
-    goal: 5000,
+    stepCountToday: 0,
+    goalToday: 10000,
     data: [],
     readyToSendProps: false,
   };
   this.getStepCountForDate = this.getStepCountForDate.bind(this);
-}
+}// End constructor
+
 
   componentDidMount() {
     this._subscribe();
@@ -33,12 +32,7 @@ export default class StepComponent extends React.Component {
   }
 
   _subscribe = () => {
-    this._subscription = Pedometer.watchStepCount(result => {
-      this.setState({
-        currentStepCount: result.steps
-      });
-    });
-
+    //Determine whether the pedometer is available.
     Pedometer.isAvailableAsync().then(
       result => {
         this.setState({
@@ -50,103 +44,78 @@ export default class StepComponent extends React.Component {
           isPedometerAvailable: "Could not get isPedometerAvailable: " + error
         });
       }
-);
+    );
 
+// Get today's step count
 const end = new Date();
 const start = new Date();
-start.setHours(0,0,0,0);
-//console.log("end: " + end + ", start: " + start);
-Pedometer.getStepCountAsync(start, end).then(
+start.setHours(0,0,0,0); // Step count from 00:00 - current time
+
+Pedometer.getStepCountAsync(start, end).then( // Gets the step count between two dates.
   result => {
-    this.setState({ pastStepCount: result.steps });
+    this.setState({ stepCountToday: result.steps });
   },
   error => {
     this.setState({
-      pastStepCount: "Could not get stepCount: " + error
+      stepCountToday: "Could not get stepCount: " + error
     });
   }
 );
-/*
-this.props.sendData([
-  {key: new Date("2018","09","06").toDateString(), steps:3000, goal: 5000, achieved: false},
-  {key: new Date("2018","09","07").toDateString(), steps:2000, goal: 3000, achieved: false},
-  {key: new Date("2018","09","08").toDateString(), steps:7000, goal: 7000, achieved: true},
-  {key: new Date("2018","09","09").toDateString(), steps:13000, goal: 10000, achieved: true},
-]);
-*/
-this.createLogData();
-//this.getStepCountForDate(new Date("2018","09","07"));
-};
+
+this.createLogData(); // Creates step count log and send it to StepInfoComponent (and later to StepLogComponent)
+
+}; // End _subscribe
+
 
 getStepCountForDate(date){
-  const end = date;
+  // Get step count from date and add to this.state.data
+
+  const end = date; // End date/time for fatching step count
   let today = new Date();
   if(!((end.getFullYear()== today.getFullYear()) && (end.getMonth()== today.getMonth()) && end.getDate()== today.getDate())){
-    end.setHours(23,59,59,999);
+    end.setHours(23,59,59,999); // If not today, set hours to 23:59:59
   };
-  const start = new Date();
+
+  const start = new Date(); //Start date/time for fatching step count
   start.setDate(end.getDate());
   start.setHours(0,0,0,0);
-  //console.log("end: " + end + ", start: " + start);
+
+  //Get the step count between two dates.
   Pedometer.getStepCountAsync(start, end).then(
     result => {
-      var newData = [];
+      let newData = []; // Used to add step count to this.state.data
       newData = this.state.data;
-      //console.log("new data: " + newData);
-      var achieved = false;
+
+      let achieved = false; // Used to decide whether goal is achieved in StepLogComponent
       if(result.steps>=10000){
         achieved = true;
       }
+
       newData.push({key: date.toDateString(), steps: result.steps, goal: 10000, achieved: achieved});
       this.setState({ data: newData });
     },
     error => {
-      this.setState({
-        testStepCount: "Could not get stepCount: " + error
+        console.log("Could not get stepCount: " + error);
       });
-      });
-};
+}; // End getStepCountForDate
 
 sendData() {
-  /*var length = this.state.data.length;
-    var isReady = this.state.readyToSendProps;
-    console.log("isReadey: " + isReady + ", length: " + length);
-      console.log("it is ready");*/
-      var data = this.state.data;
+  // Sends the step count log to StepInfoComponent (and later to StepLogComponent)
+      let data = this.state.data;
       this.props.sendData(data);
-      //this.setState({readyToSendProps: false});
-
-  /*
-  console.log("It updated!!");
-  console.log("data: " + this.state.data);
-  console.log("length: " + this.state.data.length);
-    for(var i=0; i< this.state.data.length; i++){
-      console.log(i + "key: " + this.state.data[i].key);
-      console.log(i + "steps: " + this.state.data[i].steps);
-    };*/
-
 }
 
 createLogData(){
-  /*var today = new Date();
-  var yesterday = new Date();
-  yesterday.setDate(yesterday.getDate()-1);
-  console.log("Today: " + today );
-  console.log("yesterday: " + yesterday);*/
-  let list = [];
-  let goal = 10000;
+  // Creates step count log and send it to StepInfoComponent (and later to StepLogComponent)
   for (var i = 1; i < 31; i++){
-
     var date = new Date();
     date.setDate(date.getDate()-i);
-    //console.log(date);
-    this.getStepCountForDate(date);
+    this.getStepCountForDate(date); // Gets step count for the date and adds to log
   }
-  this.setState({
+  this.setState({ // When the log is finished, it is sent to the StepInfoComponent (and later to StepLogComponent)
     readyToSendProps: true,
   }, this.sendData());
 }
-
 
 _unsubscribe = () => {
 this._subscription && this._subscription.remove();
@@ -155,28 +124,74 @@ this._subscription = null;
 
 render() {
 return (
+  <View style={styles.mainContainer}>
   <View style={styles.container}>
-    <Text>
-      Today:
+    <Text style={styles.todayHeader}>
+      Today
     </Text>
-    <Text>
-      Steps: {this.state.pastStepCount}
+    <Text style={styles.todayText}>
+      Steps: {this.state.stepCountToday}
     </Text>
-    <Text>Goal: {this.state.goal}</Text>
-    <Text>Left: {this.state.goal > this.state.pastStepCount ? this.state.goal - this.state.pastStepCount : 0}</Text>
+    <Text style={styles.todayText}>Goal: {this.state.goalToday}</Text>
+    <Text style={styles.todayText}>Left: {this.state.goalToday > this.state.stepCountToday ? this.state.goalToday - this.state.stepCountToday : 0}</Text>
+</View>
+  <View style={styles.container}>
+  <Image style={styles.img} source={ require('../assets/run_big.png')} />
+  </View>
+
   </View>
 );
 }
-}
+}// Class end
 
-const styles = StyleSheet.create({
-container: {
-flex: 1,
-marginTop: 20,
-marginLeft: 20,
-alignItems: "flex-start",
-justifyContent: "flex-start"
-}
-});
 
-//Expo.registerRootComponent(StepComponent);
+
+/*
+createTestData(){
+  for (var i = 1; i < 5; i++){
+    var date = new Date();
+    date.setDate(date.getDate()-i);
+    date.setHours(0,0,0,0);
+    //console.log(date);
+    _storeData(date.toString(), (i*1000).toString());
+  }
+};
+*/
+
+/*
+<View style={styles.sContainer2}>
+ <TextInput
+         style={styles.textInput}
+         placeholder="change goal"/>
+        <Image style={styles.img} source={ require('../assets/checked.png')} />
+  </View>
+
+
+
+
+let _storeData = async (key, value) => {
+  console.log("Store   key: " + key + " , value: " + value);
+  try {
+    await AsyncStorage.setItem(key, value);
+  } catch (error) {
+    console.log(" Store error: " + error);
+  }
+};
+
+let _retrieveData = async (key) => {
+
+  try {
+    const value = await AsyncStorage.getItem(key);
+    console.log("Retrieve   key: " + key + ", value: " + value);
+    if (value !== null) {
+      // We have data!!
+      return(value);
+    }
+   } catch (error) {
+     console.log("Retrieve error: " + error);
+   }
+};
+let _clear = async () =>{
+  await AsyncStorage.clear();
+};
+*/

@@ -1,10 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import StepComponent from "./StepComponent.js";
-import FlatListBasics from './StepLogComponent.js';
-// https://www.flaticon.com/free-icon/walk_1096458
-// Icon made by [Freepik] from www.flaticon.com
+import StepLogComponent from './StepLogComponent.js';
+import styles from '../stylesheets/StepInfoStylesheet.js';
+
+
 class StepInfoComponent extends React.Component{
+  // The component is parent to StepComponent and StepLogComponent
+  // Main task is to transfer log data from StepComponent to StepLogComponent
+
   constructor(props) {
       super(props);
       this.state={
@@ -14,9 +18,8 @@ class StepInfoComponent extends React.Component{
 }
 
 getStepsFromDates(newData){
-  //console.log(newData);
+  // When the log is created in StepComponent,this function will be called and the log will be saved in this.state.data
 this.setState({data:newData});
-
 };
 /*componentDidUpdate(prevProps, prevState) {
   // only update chart if the data has changed
@@ -35,24 +38,12 @@ this.setState({data:newData});
     return (
       <View style = {styles.container}>
         <StepComponent sendData={this.getStepsFromDates}/>
-        <FlatListBasics data={this.state.data}/>
-
+        <StepLogComponent data={this.state.data}/>
       </View>
-
     );
   }
 
+} // End class
 
-}
-
-const styles = StyleSheet.create({
-container: {
-flex: 1,
-marginTop: 0,
-marginLeft: 0,
-alignItems: "flex-start",
-justifyContent: "flex-start"
-}
-});
 
 export default StepInfoComponent;
