@@ -87,7 +87,6 @@ export default class CalendarComponent extends React.Component {
                             dotColor: '#ffa500'
                         }}
                         horizontal={true}
-                        pagingEnabled={true}
                         onDayPress= {(day) => {
                             this.setState({selected: day.dateString});
                         } }
