@@ -1,78 +1,135 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput, ScrollView, AsyncStorage } from 'react-native';
 import { CalendarList } from 'react-native-calendars';
-import { asyncStorage } from 'react-native';
-import { List, ListItem, FlatList } from 'react-native-elements';
- 
+import { Button, List, ListItem } from 'react-native-elements';
+import { uid } from 'react-uid';
+
+let activityList = [];
+const ASYNC_STORAGE_KEY = 'STORAGE_KEY';
+
 export default class CalendarComponent extends React.Component {
-
-    /*
-    Needs:
-    -currently selected date (selected)
-    -list with activities connected to each date
-        {date: (description1, description2)}
-    -asyncStorage for stored activities
-    -textinput to add activity
-
-    function: 
-    -when onDayPress() is triggered for a date it should trigger another function
-    -this function should go through activityList and display all activities that match datestring 
-    */
-
-    list = [
-        {
-         date: '2018-10-09',
-         text: 'An activity'},
-        {
-         date: '2018-10-16',
-         text: 'A second activity'}];
 
     constructor(props) {
         super(props);
         this.state = {
-            selected: '2018-10-09',
-            markedDates: [
-                {'': 'An activity'}
-            ]
+            selected: this.getToday(new Date()),
+            keyCount: 0,
+            markedDates: {}, 
+            activityText: '',
+            listOfActivities: activityList
         };
+        this.getToday = this.getToday.bind(this);
+        this.addActivity = this.addActivity.bind(this);
+        this.updateMarkes = this.updateMarks.bind(this);        
     }
 
-
-    getActivities() {
-        // iterates over list and shows items for selected date
+    _storeData = async () => {
+        try {
+            await AsyncStorage.setItem(ASYNC_STORAGE_KEY, JSON.stringify(activityList));
+        } catch (error) {
+            console.log(error);
+        }
     }
 
-    
+    _retrieveData = async () => {
+        try {
+            const value = await AsyncStorage.getItem(ASYNC_STORAGE_KEY);
+            if (value != null) {
+                activityList = JSON.parse(value);
+                this.setState({listOfActivities: activityList})
+            } else {
+                this._storeData();
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    addActivity() {
+        if (!(this.state.activityText == '')) {
+            // generates a unique "enough" key for list-items, could be better
+            let newKey = new Date().getUTCMilliseconds();
+            this.state.listOfActivities.push({Key: newKey, date: this.state.selected, atext: this.state.activityText});
+            this.setState({activityText: ''});
+        }
+        this._storeData();
+        this.updateMarks();
+    }
+
+    getToday(today) {
+        let day = today.getDate();
+        let month = today.getMonth() + 1;
+        let year = today.getFullYear();
+        return year + '-' + month + '-' + day;
+    }
+
+    // Updates the markings in the calendar which marks which days have activities added
+    updateMarks() {
+        let newMarkedObj = {};
+        this.state.listOfActivities.map((item) => {
+            newMarkedObj = {...newMarkedObj, [item.date]: {marked: true}}
+        })
+        this.setState({ markedDates: newMarkedObj});
+    }
+
+    componentWillMount() {
+        this._retrieveData().done();
+        setTimeout(this.updateMarkes, 1000);
+    }
 
     render () {
         return (
             <View style={styles.wrapper}>
-                <View style={{height: 50}}></View>
-                <CalendarList style={styles.calendar}
-                    horizontal={true}
-                    pagingEnabled={true}
-                    onDayPress={(day) => this.setState({selected: day.dateString}) }
-                    hideExtraDays={false}
-                    markedDates={{
-                        [this.state.selected]: {selected: true, marked: true, selectedColor: 'green'},
-                      }}
-                />
-              
-                <View style={styles.activity}>
-                    <Text>Activity</Text>
-                    <Text>{this.state.selected}</Text>
-                    <List>
-                        {
-                            this.list.filter((item) => (item.date == this.state.selected)).map((item) => (
+
+                <View style={styles.calendar}>
+                    <CalendarList 
+                        theme={{
+                            dotColor: '#ffa500'
+                        }}
+                        horizontal={true}
+                        pagingEnabled={true}
+                        onDayPress= {(day) => {
+                            this.setState({selected: day.dateString});
+                        } }
+                        hideExtraDays={false}
+                        markedDates={this.state.markedDates}
+                    />
+                </View>
+                
+                <View style={styles.textAndButtonContainer}>
+                    <TextInput style={{height: 45, borderWidth: 3, borderColor: '#eee', borderRadius: 8, margin: 5}}
+                        placeholder="  Add something"
+                        onChangeText={(value) => this.setState({activityText: value})}
+                        value={this.state.activityText}
+                    />
+                    <Button 
+                        title='Add activity'
+                        onPress={() => {
+                            this.addActivity();
+                        }}    
+                        />
+                    <Text style={styles.selectedText}>
+                        Selected day: {this.state.selected}
+                    </Text>
+                </View>
+                
+                <View style={styles.activityItems}>
+                    <ScrollView>
+                        <List> 
+                            {
+                                // loops over the activity list and displays the ones for the curretly selected day
+                                this.state.listOfActivities.filter((item) => (item.date == this.state.selected)).map((item) => (
                                 <ListItem
-                                key={item.text}
-                                title={item.text}
+                                key={uid(item)}
+                                title={item.date}
+                                subtitle={item.atext}
                                 // hides right arrow, can use for edit?
                                 hideChevron={true} 
-                                />
-                            ))
-                        }
-                    </List>
+                                />                                    
+                                ))
+                            }
+                        </List>
+                    </ScrollView>
                 </View>
 
             </View>
@@ -81,22 +138,27 @@ export default class CalendarComponent extends React.Component {
     }
 }
 
+
 const styles = StyleSheet.create({
     wrapper: {
         flex: 1,
-        backgroundColor: 'skyblue',
         flexDirection: 'column',
-        alignItems: 'stretch'
     },
     calendar: {
         flex: 1,
         borderWidth: 1,
-        borderColor: 'black'
-
+        borderColor: '#eeeeee'
     },
-    activity: {
-        flex: 1,
-        borderWidth: 1,
-        borderColor: 'black',
+    activityItems: {
+        flex: 0.5
+    },
+    textAndButtonContainer: {
+        flex: 0.4
+    },
+    selectedText: {
+        alignSelf: 'center', 
+        color: '#ffa500', 
+        fontSize: 20,
+        padding: 5
     }
 });
