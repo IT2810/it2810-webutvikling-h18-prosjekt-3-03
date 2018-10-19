@@ -64,7 +64,8 @@ export default class StepLogComponent extends Component {
                         style={styles.dateText}>{item.key}</Text>
                         <Image style={styles.stepImg} source={require('../../assets/run.png')}/><Text
                             style={styles.stepText}>{item.steps}/{item.goal}</Text></ View>
-                        {item.achieved ? <Image style={styles.starImg} source={require('../../assets/favourites.png')}/> :
+                        {item.achieved ?
+                            <Image style={styles.starImg} source={require('../../assets/favourites.png')}/> :
                             <Image style={styles.starImg} source={require('../../assets/empty.png')}/>}</View>}
 
                 />

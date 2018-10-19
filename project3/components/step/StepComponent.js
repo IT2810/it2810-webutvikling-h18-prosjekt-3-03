@@ -1,6 +1,6 @@
-import React from "react";
-import {Pedometer} from "expo";
-import {Text, View, Image} from "react-native";
+import React from 'react';
+import {Pedometer} from 'expo';
+import {Text, View, Image} from 'react-native';
 import styles from '../../stylesheets/step/StepStylesheet.js';
 // https://docs.expo.io/versions/latest/sdk/pedometer#expopedometergetstepcountasyncstart-end
 // Icon ('../assets/run_big.png') is made by Nikita Golubev (https://www.flaticon.com/authors/nikita-golubev) from www.flaticon.com 

@@ -1,6 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
-import StepComponent from "./StepComponent.js";
+import StepComponent from './StepComponent.js';
 import StepLogComponent from './StepLogComponent.js';
 import styles from '../../stylesheets/step/StepInfoStylesheet.js';
 
