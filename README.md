@@ -2,7 +2,7 @@
 
 ## Innhold
 * 1 Valg og løsninger
-* 2 Kjør prosjekt
+* 2 Kjør prosjektet
 * 3 Kalender med aktiviteter
 * 4 Skritteller-komponenter
   * 4.1 Struktur
@@ -10,6 +10,7 @@
     * 4.2.1 StepComponent
     * 4.2.2 StepLogComponent
 * 5 Todo-liste
+  * 5.1 Struktur
 * 6 Navigasjon
 * 7 Kilder
 
@@ -261,7 +262,7 @@ Skrittmålet for en dag er et standard mål på 10 000 skritt. Vi ønsket å leg
 <br />
 
 ### 4.2 Virkemåte/Tutorials
-NB! Hvis man endrer på koden og refresher appen vil man få en feilmelding («Already managing a GoogleApiClient with id 0»). Expo hadde ingen dokumentasjon angående dette, så løsningen er å restarte appen.
+**NB!** Hvis man endrer på koden og refresher appen vil man få en feilmelding («Already managing a GoogleApiClient with id 0»). Expo hadde ingen dokumentasjon angående dette, så løsningen er å restarte appen.
 
 <br />
 
@@ -315,6 +316,26 @@ Når StepLogComponent mottar loggen fra StepInfoComponent, vil componentDidUpdat
 
 
 ## 5 Todo-liste
+Todo-lista vi har brukt i prosjektet, Todo App with React Native, er i all hovedsak basert på kode hentet fra et GitHub-repo: https://github.com/hellokoding/todoapp-reactnative. Det har også en tilhørende steg-for-steg guide, som beskriver og forklarer de forskjellige komponentene: https://hellokoding.com/todo-app-with-react-native.
+
+Vi har vært nødt til å fikse en del på koden for å få den til å fungere med bl.a. å slette todos og å lagre tilstand med AsyncStorage.
+
+### 5.1 Struktur
+Todo-lista består av èn rot-komponent: `ListView`.
+
+##### `ListView`
+Består av en `OmniBox` og en `SortableListView`.
+
+##### `OmniBox`
+Inneholder en `TextInput`, viser søkeresultater i todo-lista mens man skriver, og legger til en todo i lista når man trykker enter.
+
+**NB!** Når `OmniBox` viser søkeresultater endrer den på den samme lista som inneholder alle todos, så vær forsiktig med å lagre todo-lista samtidig som søkeresultater vises.
+
+##### `SortableListView`
+En tredjepartskomponent fra NPM-pakken `react-native-sortable-listview`, som er inkludert i package.json-fila i GitHub-repoet. `SortableListView` blir gitt en `ListViewItem` som brukes for å instansiere hver enkelt todo i lista.
+
+##### `ListViewItem`
+Inneholder en `CheckBox`, et tekstfelt og en sletteknapp.
 
 
 <br />
