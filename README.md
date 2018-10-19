@@ -9,7 +9,8 @@
     * 3.2.1 StepComponent
     * 3.2.2 StepLogComponent
 * 4 Todo-liste
-* 5 Kilder
+* 5 Navigasjon
+* 6 Kilder
 
 <br />
 
@@ -309,6 +310,78 @@ Når StepLogComponent mottar loggen fra StepInfoComponent, vil componentDidUpdat
 
 <br />
 
-## 5 Kilder
+## 5 Navigasjon
+Navigasjonen i appen er løst ved hjelp av react-navigation APIet. Vi har satt opp at det skal være tre skjermer man kan navigere mellom ved å trykke på tabsene nederst i appen. Det er tre tabs man kan trykke på: Steps for å vise skrittelleren, Calendar for å vise kalender med aktivitet, og Goals for å vise målene man har lagt inn. 
+<br/>
+For å lage tabsene nederst har vi brukt createBottomTabNavigator, men siden denne ikke lagde noen header valgte vi å bruke den sammen med createStackNavigator som kommer med header. 
+<br/>
+Ikonene vi har brukt i tabsene er fra @expo/vector-icons. Vi valgte å bruke MaterialIcons siden disse har en generelt godt design de fleste er kjent med og kjenner igjen. 
+
+### 5.1 Tutorial for tredjepartskomponenter og APIer
+#### 5.1.1 react-navigation
+React-navigation: https://reactnavigation.org/docs/en/getting-started.html
+
+For å komme i gang kjør: 
+
+```
+npm install --save react-navigation
+```
+
+Og importer komponentene du vil bruke. Vi har brukt createStackNavigation og createBottomTabNavigation:
+
+```
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+```
+
+Slik vi gjorde det lagde vi en stackNavigator for hver del som navigerte til sin respektive skjerm, slik at stacken bare har en skjerm å navigere til. Deretter satt vi inn at bottomTabNavigator skulle kunne navigere til hver av disse stackene. På denne måten kan vi navigere mellom de tre skjermene gjennom å trykke på tabsene, samtidig som vi får med en header som kommer fra stackNavigatoren. 
+
+```
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+// importer alle skjerm-komponenter du ønsker å navigere til
+
+// for hver skjerm lager du en stackNavigator slik
+const someScreenStack = createStackNavigator({
+     name: {
+         screen: nameOfScreenComponent,
+     },
+});
+
+// til slutt legger du inn i bottomTabNavigator og exporterer denne til default
+export default createBottomTabNavigation({
+    name: someScreenStack,
+  },
+  {initialRouteName: 'name'}  // for å sette hvilken skjerm appen starter på
+);
+
+```
+#### 5.1.2 @expo/vector-icons
+@expo/vector-icons: https://docs.expo.io/versions/latest/guides/icons
+<br/>
+Liste med ikoner: https://expo.github.io/vector-icons/
+
+Vi valgte å bruke @expo/vector-icons siden denne allerede er innstallert når man har satt opp et expo-prosjekt med expo init --. Den bygger på react-native-vevtor-icons, slik at vi hadde en rekke ikoner tilgjengelig. 
+
+For å komme i gang var det bare å importere den typen ikon man ville bruke. Hos oss var det MaterialIcons (i listen over ikoner står navnet på typen ikon til høyre):
+
+```
+import { MaterialIcons } from '@expo/vector-icons';
+```
+For å legge inn ikonene på de ulike tabsene la vi inn en navigationOption på hver av stackene i navigasjonen.
+```
+...
+someScreenStack.navigationOptions = {
+    tabBarIcon: {
+        <MaterialIcons
+            name={'navnetPåIkonet'}
+            size={størrelsenPåIkonet}
+    },
+};
+
+...
+```
+
+<br/>
+
+## 6 Kilder
 
 * Ikonet '/assets/run_big.png' er lagd av [Nikita Golubev](https://www.flaticon.com/authors/nikita-golubev) fra www.flaticon.com.
