@@ -110,14 +110,19 @@ React-native-calendars: https://github.com/wix/react-native-calendars
 
 <br/>
 For å komme i gang med kalenderen må du lagre og installere modulen i prosjektet med: 
+
 ```
 npm install --save react-native-calendars
 ```
+
 Deretter må du importere komponentene du ønsker å bruke inn i filen de skal brukes i. I vårt prosjekt brukte vi kun CalendarList-komponenten, men flere er tilgjengelig i modulen.
+
 ```Jacascript
 import { CalendarList } from 'react-native-calendar';
 ```
+
 Når du skal bruke komponenten skriver du inn navnet på komponenten der du ønsker å bruke den i render-funksjonen.
+
 ```
    render() {
       return (
@@ -125,7 +130,9 @@ Når du skal bruke komponenten skriver du inn navnet på komponenten der du øns
       );
    }
 ```
+
 I tillegg er det ulike parametere man kan legge til på hver komponent for å endre utseende og styre oppførselen til komponenten. Et eksempel fra vårt prosjekt er:
+
 ```
 ...
    <CalendarList
@@ -142,6 +149,7 @@ I tillegg er det ulike parametere man kan legge til på hver komponent for å en
 ```
 
 Alle event handler callbacks kalles med Calendar-objekter på formen nedenfor (hentet fra deres dokumentasjon). Er slike objekter vi bruker i onPress-funksjonen i CalendarList-komponenten for å hente ut datestringen for datoen som er blitt trykket på. 
+
 ```
 {
    day: 1,     //day of month (1-31)
@@ -159,15 +167,17 @@ Vi har brukt react-native-elements for knapp, liste og listelementer i CalendarC
 
 <br/>
 For å komme i gang med react-native-elements må du lagre og installere modulen i prosjektet: 
+
 ```
 npm install --save react-native-elements
 ```
+
 Deretter importerer du komponentene du ønsker å bruke i filen de skal brukes i. I vårt prosjekt har vi brukt komponentene Button, List og ListItem. For å bruke komponentene skriver du bare inne navnet på dem der hvor du vil ha dem i render-funksjonen. <br/>
 I vårt prosjekt har vi en liste med data vi ønsker å vise, og for å gjøre det itererer vi over listen og genererer en ListItem hvor hvert element i listen. Key og title er parametere man kan legge til ListItem, hvor key må være med (og må være unik) og title er teksten for vises i listen. Det er også flere parametere som kan legges til i ListItem. 
+
 ```
 imort { Button, List, ListItem } from 'react-native-elements';
 
-...
     render() {
        return(
            <List 
