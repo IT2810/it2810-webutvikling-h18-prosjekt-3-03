@@ -62,16 +62,17 @@ For å få kalenderen og aktivitets-listen til å oppdateres ved endring i en av
 Bruker selected-variabelen for å lagre hvilken dato som er blitt trykket på og valgt. MarkedDates er en array hvor markeringene i kalenderen lagres, og som settes inn i MarkedDates-parameteren i CalendarList-komponenten. ActivityText brukes i forbindelse med input når man legger til en aktivitet. ListOfActivities er en liste over alle aktiviterer som er lagt til og hvilken dato de tilhører. Denne oppdateres underveis og når lagrede data lastes inn med AsyncStorage.
 
 <br/> 
+
 Funksjonene som brukes:
 <br/>
 
-___storeData():___
+____storeData():___
 
 Bruker denne funksjonen til lagre data i CalendarComponent med AsyncStorage. Den lagrer listen activityList, som inneholder alle aktivitetene i appen. 
 
 <br/>
 
-___retrieveData():___
+____retrieveData():___
 
 Henter inn datane som ligger lagret, og legger dem inn i state til listOfActivities slik at resten av komponenten kan bruke listen. 
 
@@ -103,7 +104,11 @@ Gjør to funksjons-kall: et til retrieveData og et til updateMarks. RetrieveData
 
 <br/>
 
-### 2.2 Tutorial for tredjepartskomponent
+### 2.2 Tutorial for tredjepartskomponenter og APIer
+#### 2.2.1 react-native-calendars
+React-native-calendars: https://github.com/wix/react-native-calendars
+
+<br/>
 For å komme i gang med kalenderen må du lagre og installere modulen i prosjektet med: 
 ```
 npm install --save react-native-calendars
@@ -112,7 +117,7 @@ Deretter må du importere komponentene du ønsker å bruke inn i filen de skal b
 ```Jacascript
 import { CalendarList } from 'react-native-calendar';
 ```
-Når du skal bruke komponenten skriver du inn navnet på komponenten der du ønsker å bruke den.
+Når du skal bruke komponenten skriver du inn navnet på komponenten der du ønsker å bruke den i render-funksjonen.
 ```
    render() {
       return (
@@ -147,7 +152,38 @@ Alle event handler callbacks kalles med Calendar-objekter på formen nedenfor (h
 }
 
 ```
+#### 2.2.2 react-native-elements
+React-native-elements: https://react-native-training.github.io/react-native-elements/docs/0.19.1/overview.html
 
+Vi har brukt react-native-elements for knapp, liste og listelementer i CalendarComponent. Detta ga oss ferdige komponenter med et fint utseende vi kunne bruke. 
+
+<br/>
+For å komme i gang med react-native-elements må du lagre og installere modulen i prosjektet: 
+```
+npm install --save react-native-elements
+```
+Deretter importerer du komponentene du ønsker å bruke i filen de skal brukes i. I vårt prosjekt har vi brukt komponentene Button, List og ListItem. For å bruke komponentene skriver du bare inne navnet på dem der hvor du vil ha dem i render-funksjonen. <br/>
+I vårt prosjekt har vi en liste med data vi ønsker å vise, og for å gjøre det itererer vi over listen og genererer en ListItem hvor hvert element i listen. Key og title er parametere man kan legge til ListItem, hvor key må være med (og må være unik) og title er teksten for vises i listen. Det er også flere parametere som kan legges til i ListItem. 
+```
+imort { Button, List, ListItem } from 'react-native-elements';
+
+...
+    render() {
+       return(
+           <List 
+             {
+                list.map((item) => (
+                    <ListItem
+                        key={somekey}
+                        title={textToShowFromItem}
+                    />
+                ))
+             }
+           />
+           <Button/>
+       );
+    }
+```
 
 <br />
 
