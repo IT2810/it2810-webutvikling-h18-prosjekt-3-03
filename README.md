@@ -1,18 +1,26 @@
 # Gruppe 3 prosjekt 3
 
 ## Innhold
-* 1 Valg og løsninger
-* 2 Kjør prosjektet
-* 3 Kalender med aktiviteter
-* 4 Skritteller-komponenter
-  * 4.1 Struktur
-  *	4.2 Virkemåte/tutorials
-    * 4.2.1 StepComponent
-    * 4.2.2 StepLogComponent
-* 5 Todo-liste
-  * 5.1 Struktur
-* 6 Navigasjon
-* 7 Kilder
+* [1 Valg og løsninger](#1-valg-og-løsninger)
+* [2 Kjør prosjektet](#2-kjør-prosjektet)
+* [3 Kalender med aktiviteter](#3-kalender-med-aktiviteter)
+  * [3.1 Struktur](#31-struktur)
+  * [3.2 Tutorial for tredjepartskomponenter og API-er](#32-tutorial-for-tredjepartskomponenter-og-api-er)
+    * [3.2.1 react-native-calendars](#321-react-native-calendars)
+    * [3.2.2 react-native-elements](#322-react-native-elements)
+    * [3.2.3 react-uid](#323-react-uid)
+* [4 Skritteller-komponenter](#4-skritteller-komponenter)
+  * [4.1 Struktur](#41-struktur)
+  *	[4.2 Virkemåte/tutorials](#42-virkemåtetutorials)
+    * [4.2.1 StepComponent](#421-stepcomponent)
+    * [4.2.2 StepLogComponent](#422-steplogcomponent)
+* [5 Todo-liste](#5-todo-liste)
+  * [5.1 Struktur](#51-struktur)
+* [6 Navigasjon](#6-navigasjon)
+  * [6.1 Tutorial for tredjepartskomponenter og API-er](#61-tutorial-for-tredjepartskomponenter-og-api-er)
+    * [6.1.1 react-navigation](#611-react-navigation)
+    * [6.1.2 @expo/vector-icons](#612-expovector-icons)
+* [7 Kilder](#7-kilder)
 
 
 <br />
@@ -33,7 +41,7 @@ For navigasjon mellom de tre komponentene vi tenkte å lage, fant vi React Navig
 <br />
 
 
-## 2 Kjør prosjekt 
+## 2 Kjør prosjektet
 1. __Klone eller last ned Github prosjektet og installer alle modulene__
     Bruk kommandolinjen, velg mappen du ønsker å legge prosjektet i og skriv inn:
     ```
@@ -70,7 +78,7 @@ For navigasjon mellom de tre komponentene vi tenkte å lage, fant vi React Navig
 ## 3 Kalender med aktiviteter
 Kalenderen vi har brukt i prosjektet er en tredjepartskomponent hentet herfra: https://github.com/wix/react-native-calendars
 
-### 3.1 Struktur 
+### 3.1 Struktur
 CalendarComponent er todelt: den består av en kalender som viser en oversikt over hvilke datoer man har lagt inn aktiviteter på, og en liste som viser hvilke aktiviteter som ligger inne for en gitt dato. I tillegg er det mulighet for å legge til nye aktiviterer for en valgt dato.\
 Dessverre fikk vi ikke implementert sletting av aktiviteter når de først er lagt til. Denne funksjonaliteten viste seg å ta mer tid enn vi hadde tilgjengelig, og ble derfor sløyfet i denne omgangen. 
 
@@ -83,31 +91,31 @@ Bruker selected-variabelen for å lagre hvilken dato som er blitt trykket på og
 Funksjonene som brukes:
 <br/>
 
-____storeData():___
+##### `storeData()`
 
 Bruker denne funksjonen til lagre data i CalendarComponent med AsyncStorage. Den lagrer listen activityList, som inneholder alle aktivitetene i appen. 
 
 <br/>
 
-____retrieveData():___
+##### `retrieveData()`
 
 Henter inn datane som ligger lagret, og legger dem inn i state til listOfActivities slik at resten av komponenten kan bruke listen. 
 
 <br/>
 
-__addActivity():__
+##### `addActivity()`
 
 Henter inn verdien lagret i activityText og selected, og bruker disse til å opprette et nytt element i listOfActivities. Kjører også et kall til __storeData()__ for å lagre endringene som er gjort i listen, og et kall til updateMarkes() for å oppdatere markeringene i kalenderen. 
 
 <br/>
 
-__getToday(today):__
+##### `getToday(today)`
 
 En enkel funksjon som tar inn et Date-objekt og returnerer en streng på formatet 'YYYY-MM-DD' basert på denne. Brukes blant annet i forbindelse med å sette selected til dagens dato. Strengen må være på dette formatet slik at den kan settes inn i markedDates. 
 
 <br/>
 
-__updateMarks():__
+##### `updateMarks()`
 
 Brukes for å oppdataer markedDates i state slik at markeringene oppdateres i CalendarList-komponenten. Går over listOfAvtivities-listen, og legger til en markering i en array. Når den er ferdig med listen oppdateres staten til markedDates. 
 <br/> 
@@ -115,13 +123,13 @@ Var litt vanskelig å finne ut hvordan man skulle oppdatere markedDates siden el
 
 <br/>
 
-__componentDidMount():__
+##### `componentDidMount()`
 
 Gjør to funksjons-kall: et til retrieveData og et til updateMarks. RetrieveData henter inn de lagrede dataene når komponenten er mounted. Siden dataene hentes asynkront tar det litt tid før staten er oppdatert, og siden updateMarks er avhengig av innholdet i listOfActivities er det satt en timout på kallet til updateMarks slik at staten er blitt oppdatert når funksjonen trenger den. 
 
 <br/>
 
-### 3.2 Tutorial for tredjepartskomponenter og APIer
+### 3.2 Tutorial for tredjepartskomponenter og API-er
 #### 3.2.1 react-native-calendars
 React-native-calendars: https://github.com/wix/react-native-calendars
 
@@ -271,7 +279,7 @@ Vi bruker Pedometer fra Expo APIet til å hente ut data fra skritteller. For mer
 
 <br />
 
-___subscribe():__
+##### `subscribe()`
 
   _subscribe() blir kalt når komponenten mounter, og brukes til å opprette kontakt med skritteller og hente ut antall skritt for i dag.
 <br />
@@ -286,19 +294,19 @@ Til slutt må createLogData() kalles for å lage logg-data. (se avsnitt lenger n
 
 <br />
 
-__sendData():__
+##### `sendData()`
 
 sendData() kalles for å sende logg-data til StepInfoComponent.
 
 <br />
 
-__createLogData():__
+##### `createLogData()`
 
 createLogData() kalles for å lage skritteller-loggen for de siste 30 dagene. Dette gjøres ved å kalle getStepCountForDate(date) for hver dato. Etterpå kalles sendData().
 
 <br />
 
-__getStepCountForDate(date):__
+##### `getStepCountForDate(date)`
 
 getStepCountForDate(date) brukes for å hente ut antall skritt for en valgt dato som skal lagres i loggen. Dette følger samme prinsipp som i  _subscribe(). Etterpå legger man inn dato, antall skritt, mål og om målet er oppnådd i state.data.
 
@@ -307,7 +315,7 @@ getStepCountForDate(date) brukes for å hente ut antall skritt for en valgt dato
 ### 4.2.2 StepLogComponent
 <br />
 
-__componentDidUpdate(prevProps, prevState):__
+##### `componentDidUpdate(prevProps, prevState)`
 
 Når StepLogComponent mottar loggen fra StepInfoComponent, vil componentDidUpdate(prevProps, prevState) sette state.isUpdated til true. Dette brukes av render() for å avgjøre om den skal vise mottatt loggdata eller en default-verdi.
 
@@ -348,7 +356,7 @@ For å lage tabsene nederst har vi brukt createBottomTabNavigator, men siden den
 <br/>
 Ikonene vi har brukt i tabsene er fra @expo/vector-icons. Vi valgte å bruke MaterialIcons siden disse har en generelt godt design de fleste er kjent med og kjenner igjen. 
 
-### 6.1 Tutorial for tredjepartskomponenter og APIer
+### 6.1 Tutorial for tredjepartskomponenter og API-er
 #### 6.1.1 react-navigation
 React-navigation: https://reactnavigation.org/docs/en/getting-started.html
 
