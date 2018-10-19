@@ -1,8 +1,9 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
-import ListView from '../components_3rd-party/todoapp-reactnative/ListView';
+import ListView from '../components_3rd-party/todoapp-reactnative/ListView.js';
 
-export default class GaolsScreen extends React.Component {
+
+export default class GoalsScreen extends React.Component {
     static navigationOptions = {
         title: 'Goals',
     };

@@ -13,7 +13,6 @@ export default class CalendarComponent extends React.Component {
         super(props);
         this.state = {
             selected: this.getToday(new Date()),
-            keyCount: 0,
             markedDates: {}, 
             activityText: '',
             listOfActivities: activityList
