@@ -20,7 +20,8 @@
   * [6.1 Tutorial for tredjepartskomponenter og API-er](#61-tutorial-for-tredjepartskomponenter-og-api-er)
     * [6.1.1 react-navigation](#611-react-navigation)
     * [6.1.2 @expo/vector-icons](#612-expovector-icons)
-* [7 Kilder](#7-kilder)
+* [7 Testing](#7-testing)
+* [8 Kilder](#8-kilder)
 
 
 <br/>
@@ -355,5 +356,18 @@ someScreenStack.navigationOptions = {
 <br/>
 
 
-## 7 Kilder
+## 7 Testing
+Vi har 41% test coverage på prosjektet vårt. Vi har skrevet tester for alle komponentene vi har skrevet selv, i tillegg for de komponentene i Todo-lista som vi har endret noe av betydning på.
+
+Testene vi har skrevet er hovedsakelig snapshot-tester og shallow rendering-tester, i tillegg til noen instance-tester. Vi fant ingen god måte å teste henting og lagring av data med AsyncStorage, som gjorde at vi ikke har testet funksjonaliteten som bruker den dataen. Testing av forskjellige kombinasjoner av state til flere av komponentene har heller ikke blitt gjort, pga. mangel på tid.
+
+Vi har gjennomført testing av appen på tre forskjellige Android-enheter, bl.a. Samsung Galaxy S5 og Huawei P20 Lite. Vi har ikke testet på noen iOS-enheter, fordi ingen av oss hadde enkel tilgang på noen. Vi har imidlertid undersøkt at modulene og API-ene vi bruker er cross-platform, så appen skal fungere på iOS også.
+
+Testingen foregikk ved at vi åpnet hver av de tre skjermene ved å trykke på tilhørende tab, tok noen skritt og sjekket at skrittelleren oppdaterte seg, bladde i kalenderen, trykket på forskjellige datoer og la til aktiviteter på noen av dem, la til, fjernet og flyttet på todos, krysset av todos, og fjernet kryss på todos. Alt fungerte som det skulle på alle tre enheter.
+
+
+<br/>
+
+
+## 8 Kilder
 * Ikonet '/assets/run_big.png' er lagd av [Nikita Golubev](https://www.flaticon.com/authors/nikita-golubev) fra www.flaticon.com.
