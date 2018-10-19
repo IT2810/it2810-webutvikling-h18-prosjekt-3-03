@@ -3,9 +3,10 @@ import {View, AsyncStorage} from 'react-native';
 import OmniBox from './OmniBox';
 import SortableListView from 'react-native-sortable-listview';
 import ListViewItem from './ListViewItem';
+import TodoModel from './TodoModel';
 import Utils from './Utils';
 
-let _storeData = async () => {
+const _storeData = async () => {
     try {
         await AsyncStorage.setItem(dataListName, JSON.stringify(dataList));
     } catch (error) {
@@ -20,6 +21,7 @@ const _retrieveData = async () => {
             dataList = JSON.parse(value);
         else {
             // Should only happen the first time the app is used
+            dataList = [new TodoModel('Long press, drag and drop a todo to sort')];
             _storeData();
         }
     } catch (error) {
