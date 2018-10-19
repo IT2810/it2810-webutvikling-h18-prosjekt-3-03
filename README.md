@@ -108,7 +108,6 @@ Gjør to funksjons-kall: et til retrieveData og et til updateMarks. RetrieveData
 #### 2.2.1 react-native-calendars
 React-native-calendars: https://github.com/wix/react-native-calendars
 
-<br/>
 For å komme i gang med kalenderen må du lagre og installere modulen i prosjektet med: 
 
 ```
@@ -163,7 +162,7 @@ Alle event handler callbacks kalles med Calendar-objekter på formen nedenfor (h
 #### 2.2.2 react-native-elements
 React-native-elements: https://react-native-training.github.io/react-native-elements/docs/0.19.1/overview.html
 
-Vi har brukt react-native-elements for knapp, liste og listelementer i CalendarComponent. Detta ga oss ferdige komponenter med et fint utseende vi kunne bruke. 
+Vi har brukt react-native-elements for knapp, liste og listelementer i CalendarComponent. Detta ga oss ferdige komponenter med et fint utseende vi kunne bruke.
 
 <br/>
 For å komme i gang med react-native-elements må du lagre og installere modulen i prosjektet: 
@@ -172,8 +171,11 @@ For å komme i gang med react-native-elements må du lagre og installere modulen
 npm install --save react-native-elements
 ```
 
-Deretter importerer du komponentene du ønsker å bruke i filen de skal brukes i. I vårt prosjekt har vi brukt komponentene Button, List og ListItem. For å bruke komponentene skriver du bare inne navnet på dem der hvor du vil ha dem i render-funksjonen. <br/>
-I vårt prosjekt har vi en liste med data vi ønsker å vise, og for å gjøre det itererer vi over listen og genererer en ListItem hvor hvert element i listen. Key og title er parametere man kan legge til ListItem, hvor key må være med (og må være unik) og title er teksten for vises i listen. Det er også flere parametere som kan legges til i ListItem. 
+Deretter importerer du komponentene du ønsker å bruke i filen de skal brukes i. I vårt prosjekt har vi brukt komponentene Button, List og ListItem. For å bruke komponentene skriver du bare inne navnet på dem der du vil ha dem i render-funksjonen. 
+<br/>
+Siden vi bruker en liste for å samle datane må vi iterere over den og generere et ListItem for hvert element i listen for å kunne vise alle elementene i listen. Key og title er parametere man kan legge til ListItem, hvor key må være med (og må være unik) og title er teksten for vises i listen. Det er også flere parametere som kan legges til i ListItem. 
+
+<br/>
 
 ```
 imort { Button, List, ListItem } from 'react-native-elements';
@@ -194,6 +196,38 @@ imort { Button, List, ListItem } from 'react-native-elements';
        );
     }
 ```
+#### 2.2.3 react-uid
+React-uid: https://www.npmjs.com/package/react-uid
+
+Vi har brukt react-uid for å generere unike nøkler for ListItem-elementene i CalendarComponent da en unik nøkkel i ListItem brukes for å skille like elementer. 
+
+For å komme i gang kjør: 
+
+```
+npm install react-uid
+```
+
+Og importer react-uid inn i filen den skal brukes i:
+
+```
+import { uid } from 'react-uid';
+```
+
+Vi brukte uid slik i ListItem for å generere unik nøkkel basert på item:
+
+```
+...
+    {
+       list.map((item) => (
+           <ListItem
+               key={uid(item)}
+               title={textToShowFromItem}
+           />
+       ))
+    }
+...
+```
+
 
 <br />
 
