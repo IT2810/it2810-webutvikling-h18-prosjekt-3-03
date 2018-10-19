@@ -28,6 +28,10 @@ class OmniBox extends Component {
 
     onSubmitEditing(event) {
         // if (event.nativeEvent.key === 'Enter' && this.state.newValue) {
+
+        // Hides keyboard and removes focus (from TextInput)
+        Keyboard.dismiss();
+
         const newDataItem = new TodoModel(this.state.newValue);
 
         const dataList = this.props.data;
@@ -39,9 +43,6 @@ class OmniBox extends Component {
 
         this.setState({newValue: ''});
         this.props.updateDataList(dataList);
-
-        // Hides keyboard and removes focus (from TextInput)
-        Keyboard.dismiss();
         // }
     }
 

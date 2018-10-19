@@ -1,6 +1,6 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import CalendarComponent from '../components/CalendarComponent';
+import {View} from 'react-native';
+import CalendarComponent from '../../calendar/CalendarComponent';
 
 export default class CalendarScreen extends React.Component {
     static navigationOptions = {

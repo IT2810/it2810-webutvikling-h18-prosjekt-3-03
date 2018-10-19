@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<TextInput
+  allowFontScaling={true}
+  blurOnSubmit={false}
+  onChange={[Function]}
+  onSubmitEditing={[Function]}
+  placeholder="Add a todo or Search"
+  style={
+    Object {
+      "backgroundColor": "#fff",
+      "borderColor": "#eee",
+      "borderRadius": 8,
+      "borderWidth": 1,
+      "fontSize": 16,
+      "height": 36,
+      "marginBottom": 0,
+      "padding": 4,
+    }
+  }
+  underlineColorAndroid="transparent"
+  value=""
+/>
+`;

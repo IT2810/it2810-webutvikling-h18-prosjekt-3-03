@@ -1,7 +1,7 @@
 import React from "react";
 import {Pedometer} from "expo";
 import {Text, View, Image} from "react-native";
-import styles from '../stylesheets/StepStylesheet.js';
+import styles from '../../stylesheets/step/StepStylesheet.js';
 // https://docs.expo.io/versions/latest/sdk/pedometer#expopedometergetstepcountasyncstart-end
 // Icon ('../assets/run_big.png') is made by Nikita Golubev (https://www.flaticon.com/authors/nikita-golubev) from www.flaticon.com 
 
@@ -138,7 +138,7 @@ export default class StepComponent extends React.Component {
                         style={styles.todayText}>Left: {this.state.goalToday > this.state.stepCountToday ? this.state.goalToday - this.state.stepCountToday : 0}</Text>
                 </View>
                 <View style={styles.container}>
-                    <Image style={styles.img} source={require('../assets/run_big.png')}/>
+                    <Image style={styles.img} source={require('../../assets/run_big.png')}/>
                 </View>
 
             </View>

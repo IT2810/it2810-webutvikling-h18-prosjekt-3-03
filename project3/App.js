@@ -1,6 +1,6 @@
 import React from 'react';
-import TabNavigation from './navigation/TabNavigation';
-import CalendarComponent from './components/CalendarComponent.js';
+import TabNavigation from './components/navigation/TabNavigation';
+import CalendarComponent from './components/calendar/CalendarComponent.js';
 
 export default class App extends React.Component {
     render() {
