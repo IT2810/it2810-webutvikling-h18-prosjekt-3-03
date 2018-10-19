@@ -59,6 +59,54 @@
 <br />
 
 ## 2 Kalender
+Kalenderen vi har brukt i prosjektet er en tredjepartskomponent hentet herfra: https://github.com/wix/react-native-calendars
+
+Vi ønsket å vise en oversiktlig kalender vi kunne bruke til å vise hvilke datoer det var lagt til aktiviteter på, og react native calendars fungerte fint til dette. I tillegg er modulen kompatibel med både Android og iOS, noe som passet fint for prosjektet. 
+
+For å komme i gang med kalenderen må du lagre og installere modulen i prosjektet med: 
+```
+npm install --save react-native-calendars
+```
+Deretter må du importere komponentene du ønsker å bruke inn i filen de skal brukes i. I vårt prosjekt brukte vi kun CalendarList-komponenten, men flere er tilgjengelig i modulen.
+```Jacascript
+import { CalendarList } from 'react-native-calendar';
+```
+Når du skal bruke komponenten skriver du inn navnet på komponenten der du ønsker å bruke den.
+```
+   render() {
+      return (
+         <View><CalendarList/></View>
+      );
+   }
+```
+I tillegg er det ulike parametere man kan legge til på hver komponent for å endre utseende og styre oppførselen til komponenten. Et eksempel fra vårt prosjekt er:
+```
+...
+   <CalendarList
+       styles={styles.calendar}  //den vanlige styles-parameteren kan brukes sammen med kalenderen
+       theme={{
+           dotColor: '#ffa500'  //fargen på dot-markeringene i kalenderen
+       }}
+       horizontal={true}  //styrer om kalenderen kan blas i vertikalt eller horisontalt
+       onPress={(day) => {
+           this.setState({selected: day.dateString});  //onPress-funksjonen brukes når man trykker på en dato i kalenderen
+       }}
+   />
+...
+```
+
+Alle event handler callbacks kalles med Calendar-objekter på formen nedenfor (hentet fra deres dokumentasjon). Er slike objekter vi bruker i onPress-funksjonen i CalendarList-komponenten for å hente ut datestringen for datoen som er blitt trykket på. 
+```
+{
+   day: 1,     //day of month (1-31)
+   month: 1,   // month of the year (1-12)
+   year: 2017, // year
+   timestamp,  // UTC timestamp representing 00:00 AM of this date
+   datestring: '2018-10-09' // date formatted as 'YYYY-MM-DD' string
+}
+
+```
+
 
 <br />
 
