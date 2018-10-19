@@ -60,30 +60,35 @@ Dessverre fikk vi ikke implementert sletting av aktiviteter når de først er la
 <br/>
 For å få kalenderen og aktivitets-listen til å oppdateres ved endring i en av dem har vi brukt ulike state-variabler for å holde dataene, og egne funksjoner for å oppdatere dem.<br/>
 Bruker selected-variabelen for å lagre hvilken dato som er blitt trykket på og valgt. MarkedDates er en array hvor markeringene i kalenderen lagres, og som settes inn i MarkedDates-parameteren i CalendarList-komponenten. ActivityText brukes i forbindelse med input når man legger til en aktivitet. ListOfActivities er en liste over alle aktiviterer som er lagt til og hvilken dato de tilhører. Denne oppdateres underveis og når lagrede data lastes inn med AsyncStorage.
+
 <br/> 
 Funksjonene som brukes:
 <br/>
 
-____storeData():__
+___storeData():___
 
 Bruker denne funksjonen til lagre data i CalendarComponent med AsyncStorage. Den lagrer listen activityList, som inneholder alle aktivitetene i appen. 
 
 <br/>
-____retrieveData():__
+
+___retrieveData():___
 
 Henter inn datane som ligger lagret, og legger dem inn i state til listOfActivities slik at resten av komponenten kan bruke listen. 
 
 <br/>
+
 __addActivity():__
 
 Henter inn verdien lagret i activityText og selected, og bruker disse til å opprette et nytt element i listOfActivities. Kjører også et kall til __storeData()__ for å lagre endringene som er gjort i listen, og et kall til updateMarkes() for å oppdatere markeringene i kalenderen. 
 
 <br/>
+
 __getToday(today):__
 
 En enkel funksjon som tar inn et Date-objekt og returnerer en streng på formatet 'YYYY-MM-DD' basert på denne. Brukes blant annet i forbindelse med å sette selected til dagens dato. Strengen må være på dette formatet slik at den kan settes inn i markedDates. 
 
 <br/>
+
 __updateMarks():__
 
 Brukes for å oppdataer markedDates i state slik at markeringene oppdateres i CalendarList-komponenten. Går over listOfAvtivities-listen, og legger til en markering i en array. Når den er ferdig med listen oppdateres staten til markedDates. 
@@ -91,6 +96,7 @@ Brukes for å oppdataer markedDates i state slik at markeringene oppdateres i Ca
 Var litt vanskelig å finne ut hvordan man skulle oppdatere markedDates siden elementene i arrayen er objekter. Brukte derfor forslagene herfra for å finne en løsning for denne delen: https://github.com/wix/react-native-calendars/issues/160
 
 <br/>
+
 __componentDidMount():__
 
 Gjør to funksjons-kall: et til retrieveData og et til updateMarks. RetrieveData henter inn de lagrede dataene når komponenten er mounted. Siden dataene hentes asynkront tar det litt tid før staten er oppdatert, og siden updateMarks er avhengig av innholdet i listOfActivities er det satt en timout på kallet til updateMarks slik at staten er blitt oppdatert når funksjonen trenger den. 
