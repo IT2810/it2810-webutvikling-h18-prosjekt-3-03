@@ -30,7 +30,7 @@
   "jest": {
     "preset": "jest-expo",
     "transformIgnorePatterns": [
-      "node_modules/(?!(react-native|react-native-(easy-grid|drawer|keyboard-aware-scroll-view|iphone-x-helper|sortable-listview|calendars|elements|vector-icons)|@expo|expo|expo-(react-native-adapter|font|asset|constants)|native-base|native-base-shoutem-theme|metro-react-native-babel-preset)/)"
+      "node_modules/(?!(react-native|react-native-(easy-grid|drawer|keyboard-aware-scroll-view|iphone-x-helper|sortable-listview|calendars|elements|vector-icons)|@expo|expo|expo-(react-native-adapter|font|asset|constants|location)|native-base|native-base-shoutem-theme|metro-react-native-babel-preset)/)"
     ]
   }
 }
