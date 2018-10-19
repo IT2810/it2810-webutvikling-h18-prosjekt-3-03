@@ -28,7 +28,7 @@
   "jest": {
     "preset": "jest-expo",
     "transformIgnorePatterns": [
-      "node_modules/(?!(react-native|react-native-(easy-grid|drawer|keyboard-aware-scroll-view|iphone-x-helper)|@expo|expo-(react-native-adapter|font|asset|constants)|native-base|native-base-shoutem-theme)/)"
+      "node_modules/(?!(react-native|react-native-(easy-grid|drawer|keyboard-aware-scroll-view|iphone-x-helper|sortable-listview)|@expo|expo-(react-native-adapter|font|asset|constants)|native-base|native-base-shoutem-theme)/)"
     ]
   }
 }
