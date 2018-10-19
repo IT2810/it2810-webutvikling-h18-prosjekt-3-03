@@ -7,5 +7,5 @@ it('renders correctly', () => {
     const tree = renderer.create(<CalendarScreen/>);
     expect(tree.toJSON().children[0].children.length).toBe(3);
     expect(tree.toJSON().children[0].type).toBe('View');
-    expect(tree).toMatchSnapshot;
+    expect(tree).toMatchSnapshot();
 });
