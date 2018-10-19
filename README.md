@@ -230,7 +230,7 @@ Skrittmålet for en dag er et standard mål på 10 000 skritt. Vi ønsket å leg
 <br/>
 
 ### 4.2 Virkemåte/Tutorials
-**NB!** Hvis man endrer på koden og refresher appen vil man få en feilmelding `Already managing a GoogleApiClient with id 0`. Expo hadde ingen dokumentasjon angående dette, så løsningen er å restarte appen.
+**NB!** Hvis man endrer på koden og refresher appen vil man få en feilmelding `Already managing a GoogleApiClient with id 0`. Expo hadde ingen dokumentasjon angående dette, så løsningen er å restarte appen. I tillegg har vi opplevd på noen enheter at logg-lista ikke dukker opp; da er også løsningen å restarte appen.
 
 ### 4.2.1 StepComponent
 Vi bruker `Pedometer` fra Expo API-et til å hente ut data fra skritteller. For mer dokumentasjon om det, se: https://docs.expo.io/versions/latest/sdk/pedometer#expopedometergetstepcountasyncstart-end. 
