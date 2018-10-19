@@ -13,7 +13,9 @@
 * 6 Navigasjon
 * 7 Kilder
 
+
 <br />
+
 
 ## 1 Valg og løsninger
 Planleggings-appen vår inneholder en kalender, en todo-liste og en skritteller med personlig mål, i tillegg til navigasjon mellom de tre skjermene.
@@ -59,13 +61,13 @@ For navigasjon mellom de tre komponentene vi tenkte å lage, fant vi React Navig
 4.	__Skritteller på mobil__
     
     For at prosjektet skal kunne ta inn data fra skrittelleren på mobilen, må man bruke Core Motion (iOS) eller Google Fit (Android).
-    
+
+
 <br />
+
 
 ## 3 Kalender med aktiviteter
 Kalenderen vi har brukt i prosjektet er en tredjepartskomponent hentet herfra: https://github.com/wix/react-native-calendars
-
-Vi ønsket å vise en oversiktlig kalender vi kunne bruke til å vise hvilke datoer det var lagt til aktiviteter på, og react native calendars fungerte fint til dette. I tillegg er modulen kompatibel med både Android og iOS, noe som passet fint for prosjektet.
 
 ### 3.1 Struktur 
 CalendarComponent er todelt: den består av en kalender som viser en oversikt over hvilke datoer man har lagt inn aktiviteter på, og en liste som viser hvilke aktiviteter som ligger inne for en gitt dato. I tillegg er det mulighet for å legge til nye aktiviterer for en valgt dato.\
@@ -236,13 +238,11 @@ Vi brukte uid slik i ListItem for å generere unik nøkkel basert på item:
 ...
 ```
 
+
 <br />
+
 
 ## 4 Skritteller-komponenter
-Vi valgte å ta i bruk skritteller som vårt eksempel på noe som var utover basic React Native UI-problematikk. Vi valgte det fordi vi synes det passet til vår planleggingsapp, vi kunne utforske Expo APIet og det virket greit å implementere.
-
-<br />
-
 ### 4.1 Struktur
 Skritteller-komponentene består av tre komponenter; StepInfoComponent er forelder til StepComponent og StepLogComponent.
 
@@ -310,11 +310,15 @@ __componentDidUpdate(prevProps, prevState):__
 
 Når StepLogComponent mottar loggen fra StepInfoComponent, vil componentDidUpdate(prevProps, prevState) sette state.isUpdated til true. Dette brukes av render() for å avgjøre om den skal vise mottatt loggdata eller en default-verdi.
 
+
 <br />
+
 
 ## 5 Todo-liste
 
+
 <br />
+
 
 ## 6 Navigasjon
 Navigasjonen i appen er løst ved hjelp av react-navigation APIet. Vi har satt opp at det skal være tre skjermer man kan navigere mellom ved å trykke på tabsene nederst i appen. Det er tre tabs man kan trykke på: Steps for å vise skrittelleren, Calendar for å vise kalender med aktivitet, og Goals for å vise målene man har lagt inn. 
