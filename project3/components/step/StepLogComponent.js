@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {FlatList, Text, View, Image} from 'react-native';
-import styles from '../stylesheets/StepLogStylesheet.js';
+import styles from '../../stylesheets/step/StepLogStylesheet.js';
 
 
 export default class StepLogComponent extends Component {
@@ -62,10 +62,10 @@ export default class StepLogComponent extends Component {
                     data={isUpdated ? this.props.data : this.state.data}
                     renderItem={({item}) => <View style={styles.container1}><View style={styles.container2}><Text
                         style={styles.dateText}>{item.key}</Text>
-                        <Image style={styles.stepImg} source={require('../assets/run.png')}/><Text
+                        <Image style={styles.stepImg} source={require('../../assets/run.png')}/><Text
                             style={styles.stepText}>{item.steps}/{item.goal}</Text></ View>
-                        {item.achieved ? <Image style={styles.starImg} source={require('../assets/favourites.png')}/> :
-                            <Image style={styles.starImg} source={require('../assets/empty.png')}/>}</View>}
+                        {item.achieved ? <Image style={styles.starImg} source={require('../../assets/favourites.png')}/> :
+                            <Image style={styles.starImg} source={require('../../assets/empty.png')}/>}</View>}
 
                 />
             </View>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import StepInfoComponent from '../components/StepInfoComponent.js';
+import StepInfoComponent from '../../step/StepInfoComponent.js';
 
 export default class StepssScreen extends React.Component {
     static navigationOptions = {

@@ -2,9 +2,9 @@ import React from 'react';
 import {createBottomTabNavigator, createStackNavigator} from 'react-navigation';
 import {MaterialIcons} from '@expo/vector-icons';
 
-import CalendarScreen from '../screens/CalendarScreen';
-import StepsScreen from '../screens/StepsScreen';
-import GoalsScreen from '../screens/GoalsScreen';
+import CalendarScreen from './screens/CalendarScreen';
+import StepsScreen from './screens/StepsScreen';
+import GoalsScreen from './screens/GoalsScreen';
 
 const CalendarStack = createStackNavigator({
     calendar: {
