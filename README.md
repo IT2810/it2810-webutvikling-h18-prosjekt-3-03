@@ -14,45 +14,35 @@
 <br />
 
 ## 1 Kjør prosjekt 
-1. __Klone eller last ned Github prosjektet__
+1. __Klone eller last ned Github prosjektet og installer alle modulene__
     
-    Bruk comand line, velg mappen du ønsker å legge prosjektet i og skriv:
-    
-    a) git clone https://github.com/IT2810/it2810-webutvikling-h18-prosjekt-3-03.git
+    Bruk kommandolinjen, velg mappen du ønsker å legge prosjektet i og skriv inn:
+    ```
+    git clone https://github.com/IT2810/it2810-webutvikling-h18-prosjekt-3-03.git
+    npm install
+    ```
     
     <br />
 
 2.	__Last ned og installer appen Expo__
-    
-    Comand line:
-    
-    a) npm install -g expo-cli
-    
-    b) expo init project3
+   
+    ```
+    npm install -g expo-cli
+    ```
     
     <br />
 
 3.	__Start Expo__
     
-    Comand line: 
-    
-    a) cd project3
-    
-    b) expo start
-    
-    Man vil da få opp en QR-kode i terminalen.
-    
-    <br />
-    
-4.	__Expo på mobil__
-    
-    a) Last ned Expo appen fra Play store eller App store
-    
-    b) Bruk appens QR-skanner til å skanne QR-koden i terminalen. Man vil nå få opp prosjektet på mobilen.
+    ```
+    cd prosjekt3
+    expo start
+    ```
+    Skann så QR-koden som kommer opp med Expo-appen. Expo kan lastes ned på Play store eller App store.
     
     <br />
 
-5.	__Skritteller på mobil__
+4.	__Skritteller på mobil__
     
     For at prosjektet skal kunne ta inn data fra skrittelleren på mobilen, må man bruke Core Motion (iOS) eller Google Fit (Android).
     
